@@ -1,0 +1,49 @@
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { StudentComponent } from './student.component';
+
+const routes: Routes = [
+  {
+    path: 'student',
+    component: StudentComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: () =>
+          import('./home/home.module').then((m) => m.HomeModule),
+      },
+      {
+        path: 'topicbank',
+        loadChildren: () =>
+          import('./topic-bank/topic-bank.module').then(
+            (m) => m.TopicBankModule
+          ),
+      },
+      {
+        path: 'topicrequest',
+        loadChildren: () =>
+          import('./topic-request/topic-request.module').then(
+            (m) => m.TopicRequestModule
+          ),
+      },
+      {
+        path: 'topicrequestregister',
+        loadChildren: () =>
+          import('./topic-request-register/topic-request-register.module').then(
+            (m) => m.TopicRequestRegisterModule
+          ),
+      },
+      {
+        path: 'document',
+        loadChildren: () =>
+          import('./document/document.module').then((m) => m.DocumentModule),
+      },
+    ],
+  },
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
+})
+export class StudentRoutingModule {}
