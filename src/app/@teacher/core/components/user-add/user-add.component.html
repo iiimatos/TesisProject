@@ -1,0 +1,13 @@
+<ng-template #contenido let-modal>
+  <div class="modal-header">
+    <h4>Agregar usuario</h4>
+    <button class="btn btn-danger" aria-label="close" type="button" (click)="modal.dismiss()"><i
+        class="far fa-times-circle"></i></button>
+  </div>
+  <div class="modal-body">
+
+  </div>
+  <div class="modal-footer"></div>
+</ng-template>
+
+<button class="btn btn-primary" (click)="modal.open(contenido)">Agregar usuario <i class="fas fa-plus"></i></button>

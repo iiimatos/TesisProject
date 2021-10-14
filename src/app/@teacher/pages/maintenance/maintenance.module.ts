@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 
 import { MaintenanceRoutingModule } from './maintenance-routing.module';
 import { MaintenanceComponent } from './maintenance.component';
+import { UserAddComponent } from '../../core/components/user-add/user-add.component';
 
 
 @NgModule({
   declarations: [
-    MaintenanceComponent
+    MaintenanceComponent,
+    UserAddComponent
   ],
   imports: [
     CommonModule,
