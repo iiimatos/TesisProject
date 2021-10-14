@@ -1,0 +1,15 @@
+<ng-template #contenido let-modal>
+  <div class="modal-header">
+    <h4>Agregar documento</h4>
+    <button class="btn btn-danger" aria-label="close" type="button" (click)="modal.dismiss()"><i
+        class="far fa-times-circle"></i></button>
+  </div>
+  <div class="modal-body">
+    <div class="mb-3">
+      <input class="form-control" type="file" id="formFile">
+    </div>
+  </div>
+  <div class="modal-footer"></div>
+</ng-template>
+
+<button class="btn btn-primary" (click)="modal.open(contenido)">Agregar documento <i class="fas fa-plus"></i></button>

@@ -3,15 +3,16 @@ import { CommonModule } from '@angular/common';
 
 import { DocumentRoutingModule } from './document-routing.module';
 import { DocumentComponent } from './document.component';
-
+import { AddProjectComponent } from '../../core/components/add-project/add-project.component'
 
 @NgModule({
   declarations: [
-    DocumentComponent
+    DocumentComponent,
+    AddProjectComponent
   ],
   imports: [
     CommonModule,
-    DocumentRoutingModule
+    DocumentRoutingModule,
   ]
 })
 export class DocumentModule { }
