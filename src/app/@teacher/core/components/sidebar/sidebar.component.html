@@ -38,16 +38,16 @@
         <!-- Add icons to the links using the .nav-icon class
                  with font-awesome or any other icon font library -->
         <li class="nav-item">
-          <a href="pages/gallery.html" class="nav-link">
-            <i class="nav-icon far fa-image"></i>
+          <a [routerLink]="['/teacher']" class="nav-link">
+            <i class="nav-icon fas fa-home"></i>
             <p>Inicio</p>
           </a>
         </li>
         <li class="nav-item has-treeview">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
+          <a [routerLink]="['/teacher/topicbank']" class="nav-link">
+            <i class="nav-icon fas fa-tasks"></i>
             <p>
-              Students
+              Proyecto
               <i class="right fas fa-angle-left"></i>
             </p>
           </a>
@@ -55,42 +55,39 @@
             <li class="nav-item">
               <a href="./index.html" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Ejemplo1</p>
+                <p>Temas Pre-aprobados</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./index.html" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Proyectos en curso</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./index.html" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Proyectos culminados</p>
               </a>
             </li>
           </ul>
         </li>
-        <li class="nav-item has-treeview">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
+        <li class="nav-item">
+          <a [routerLink]="['/teacher/document']" class="nav-link">
+            <i class="nav-icon fas fa-folder"></i>
             <p>
-              Students
-              <i class="right fas fa-angle-left"></i>
+              Documentos
+              
             </p>
           </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="./index.html" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Ejemplo1</p>
-              </a>
-            </li>
-          </ul>
         </li>
         <li class="nav-header">MANTENIMIENTO</li>
         <li class="nav-item">
-          <a href="pages/calendar.html" class="nav-link">
-            <i class="nav-icon fas fa-calendar-alt"></i>
+          <a [routerLink]="['/teacher/maintenance']" class="nav-link">
+            <i class="nav-icon fas fa-users"></i>
             <p>
-              Calendar
-              <span class="badge badge-info right">2</span>
+              Usuarios
             </p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="pages/gallery.html" class="nav-link">
-            <i class="nav-icon far fa-image"></i>
-            <p>Gallery</p>
           </a>
         </li>
       </ul>
