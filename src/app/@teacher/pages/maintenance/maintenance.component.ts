@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ApiService } from 'src/app/service/api/api.service';
-import { ListaUsuariosI } from 'src/app/models/users.interface';
+import { UserService } from 'src/app/@core/services/user.service';
 
 @Component({
   selector: 'app-maintenance',
@@ -12,10 +11,10 @@ import { ListaUsuariosI } from 'src/app/models/users.interface';
 export class MaintenanceComponent implements OnInit {
 
   public users:Array<any>=[];
-  constructor(private api:ApiService, private router:Router) { }
+  constructor(private userService:UserService, private router:Router) { }
 
   ngOnInit(): void {
-    this.api.getAllUsers().subscribe((data: any )=>{
+    this.userService.getAllUsers().subscribe((data: any )=>{
       this.users = data;
       console.log(data);
     })
