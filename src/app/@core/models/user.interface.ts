@@ -1,3 +1,4 @@
+import { ICarrera } from './carrera.interface';
 export interface IUser {
   id: number;
   nombre: string;
@@ -5,6 +6,8 @@ export interface IUser {
   username: string;
   email: string;
   role: Array<IRole>;
+  blocked: boolean;
+  carrera_id: ICarrera;
 }
 
 export interface IMeData {

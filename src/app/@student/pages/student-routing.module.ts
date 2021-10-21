@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { StudentGuard } from 'src/app/@core/guards/student.guard';
 import { StudentComponent } from './student.component';
 
 const routes: Routes = [
   {
     path: 'student',
     component: StudentComponent,
+    canActivateChild: [StudentGuard],
     children: [
       {
         path: '',

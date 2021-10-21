@@ -28,6 +28,8 @@ export class LoginComponent {
         //   status: true,
         //   user: data.user,
         // });
+        console.log(data);
+
         if (data.user.role.name === 'Student') {
           this.router.navigate(['/student']);
         } else {

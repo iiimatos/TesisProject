@@ -1,3 +1,4 @@
+import { getSession, resetSession } from './../utils/local';
 import { IMeData, IUser } from '../models/user.interface';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -58,11 +59,10 @@ export class AuthService {
   }
 
   getSession(): ISession {
-    return JSON.parse(localStorage.getItem('session') || '{}');
+    return getSession();
   }
 
   resetSession() {
-    localStorage.removeItem('session');
-    // this.updateSession({ status: false });
+    resetSession();
   }
 }

@@ -17,9 +17,9 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of users">
-        <th scope="row">{{user.id}}</th>
-        <td>{{user.Nombre}}</td>
+      <tr *ngFor="let user of users; index as i">
+        <th scope="row">{{i + 1}}</th>
+        <td>{{user.nombre}} {{user.apellido}}</td>
         <td>{{user.username}}</td>
         <td>{{user.role.name}}</td>
         <td>{{user.email}}</td>

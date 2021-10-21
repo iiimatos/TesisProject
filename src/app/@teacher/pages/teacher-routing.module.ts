@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TeacherComponent } from './teacher.component';
+import { AdminGuard } from 'src/app/@core/guards/admin.guard';
 
 const routes: Routes = [
   {
     path: 'teacher',
     component: TeacherComponent,
+    canActivateChild: [AdminGuard],
     children: [
       {
         path: '',
