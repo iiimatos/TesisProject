@@ -16,11 +16,5 @@ export class UserService {
     return this.http.get(direccion);
   }
 
-  getMe(token: string): Observable<any> {
-    const headers = new HttpHeaders ({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
-    })
-    return this.http.get(`${this.url}/users/me`, {headers} );
-  }
+
 }

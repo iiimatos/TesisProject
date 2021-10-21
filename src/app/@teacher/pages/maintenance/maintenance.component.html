@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="alert alert-light capsule" role="alert">
+  <div class="alert alert-dark capsule" role="alert">
     <h2 class="display-4 title">Usuarios</h2>
     <app-user-add></app-user-add>
   </div>
@@ -24,7 +24,9 @@
         <td>{{user.role.name}}</td>
         <td>{{user.email}}</td>
         <td *ngIf="!user.blocked else elseBlock">Activo</td>
-        <ng-template #elseBlock><td>No activo</td></ng-template>
+        <ng-template #elseBlock>
+          <td>No activo</td>
+        </ng-template>
         <td>{{user.carrera_id.carrera}}</td>
         <td>
           <button class="btn btn-primary">
