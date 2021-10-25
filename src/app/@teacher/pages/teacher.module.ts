@@ -8,7 +8,6 @@ import { SidebarComponent } from '../core/components/sidebar/sidebar.component';
 import { AsideComponent } from '../core/components/aside/aside.component';
 import { FooterComponent } from '../core/components/footer/footer.component';
 
-
 @NgModule({
   declarations: [
     TeacherComponent,
@@ -17,9 +16,6 @@ import { FooterComponent } from '../core/components/footer/footer.component';
     AsideComponent,
     FooterComponent,
   ],
-  imports: [
-    CommonModule,
-    TeacherRoutingModule
-  ]
+  imports: [CommonModule, TeacherRoutingModule],
 })
-export class TeacherModule { }
+export class TeacherModule {}
