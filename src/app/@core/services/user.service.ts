@@ -20,13 +20,29 @@ export class UserService {
     });
     return this.http.get(direccion, { headers });
   }
-
-  getUserById(id: number): Observable<any> {
+  getAllRoles(): Observable<any> {
+    let direccion = this.url + '/users-permissions/roles';
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${this.getSession().jwt}`,
     });
-    let direccion = this.url + '/users';
+    return this.http.get(direccion, { headers });
+  }
+  getAllCareers(): Observable<any> {
+    let direccion = this.url + '/carreras';
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${this.getSession().jwt}`,
+    });
+    return this.http.get(direccion, { headers });
+  }
+
+  getUserById(id: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${this.getSession().jwt}`,
+    });
+    let direccion = this.url + '/users/' + id;
     return this.http.get(direccion, { headers });
   }
 
