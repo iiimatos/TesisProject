@@ -30,8 +30,6 @@ export class AdminGuard implements CanActivateChild {
       this.role = name;
 
       if (this.role === 'Teacher' || this.role === 'Coordinator') {
-        console.log(this.role);
-
         return true;
       }
       return this.redirect();

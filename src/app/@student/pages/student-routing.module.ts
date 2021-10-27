@@ -29,13 +29,6 @@ const routes: Routes = [
           ),
       },
       {
-        path: 'topicrequestregister',
-        loadChildren: () =>
-          import('./topic-request-register/topic-request-register.module').then(
-            (m) => m.TopicRequestRegisterModule
-          ),
-      },
-      {
         path: 'document',
         loadChildren: () =>
           import('./document/document.module').then((m) => m.DocumentModule),

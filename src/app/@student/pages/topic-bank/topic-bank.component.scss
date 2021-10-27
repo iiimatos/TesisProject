@@ -1,0 +1,17 @@
+.title {
+  font-size: 40px;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 15px;
+
+  > p {
+    font-size: 20px;
+  }
+}
+
+.fas {
+  color: red !important;
+}

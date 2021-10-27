@@ -16,25 +16,17 @@ export class UserService {
     let direccion = this.url + '/users?role.name=student';
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.getSession().jwt}`,
+      Authorization: `Bearer ${getSession().jwt}`,
     });
     return this.http.get(direccion, { headers });
   }
 
-  getUserById(id: number): Observable<any> {
+  getUserById(id: any): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.getSession().jwt}`,
+      Authorization: `Bearer ${getSession().jwt}`,
     });
-    let direccion = this.url + '/users';
+    let direccion = this.url + '/users/' + id;
     return this.http.get(direccion, { headers });
-  }
-
-  getSession(): ISession {
-    return getSession();
-  }
-
-  resetSession() {
-    resetSession();
   }
 }

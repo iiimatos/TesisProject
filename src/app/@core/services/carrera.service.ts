@@ -29,8 +29,26 @@ export class CarreraService {
     return this.http.get(direccion, { headers });
   }
 
+  getAllTemas(): Observable<any> {
+    let direccion = this.url + '/temas';
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getSession().jwt}`,
+    });
+    return this.http.get(direccion, { headers });
+  }
+
   getLineaByIdCarrera(id: number): Observable<any> {
     let direccion = this.url + `/linea-investigacions?carrera_id.id=${id}`;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getSession().jwt}`,
+    });
+    return this.http.get(direccion, { headers });
+  }
+
+  getAllRoles(): Observable<any> {
+    let direccion = this.url + '/users-permissions/roles';
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${getSession().jwt}`,

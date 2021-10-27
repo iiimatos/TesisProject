@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { UserService } from 'src/app/@core/services/user.service';
 
 @Component({
@@ -11,6 +11,7 @@ import { UserService } from 'src/app/@core/services/user.service';
 export class MaintenanceComponent implements OnInit {
 
   public users:Array<any>=[];
+  
   constructor(private userService:UserService, private router:Router) { }
 
   ngOnInit(): void {
@@ -18,6 +19,16 @@ export class MaintenanceComponent implements OnInit {
       this.users = data;
       console.log(data);
     })
+    
+  }
+
+  editarUsuario(id:any){
+    this.router.navigate(['teacher/maintenance/user-edit/', id])
+    
+  }
+
+  nuevoUsuario(){
+    this.router.navigate(['teacher/maintenance/user-add/'])
   }
 
 }

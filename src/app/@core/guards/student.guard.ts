@@ -26,8 +26,6 @@ export class StudentGuard implements CanActivateChild {
       this.role = name;
 
       if (this.role === 'Student') {
-        console.log('Entro', this.role);
-
         return true;
       }
       return this.redirect();
