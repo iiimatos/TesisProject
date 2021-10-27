@@ -29,3 +29,14 @@ export interface ILoginUser {
 }
 
 export interface IMeData {}
+
+export interface IUser2 {
+  id: number;
+  nombre: string;
+  apellido: string;
+  username: string;
+  email: string;
+  role: number;
+  blocked: boolean;
+  carrera_id: number;
+}

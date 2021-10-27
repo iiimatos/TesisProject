@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { IUser } from 'src/app/@core/models/user.interface';
+import { IUser, IUser2 } from 'src/app/@core/models/user.interface';
 import { UserService } from 'src/app/@core/services/user.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class UserAddComponent implements OnInit {
     username: new FormControl(''),
     password: new FormControl(''),
     email: new FormControl(''),
-    role: new FormControl(''),
+    role: new FormControl(0),
     carrera_id: new FormControl('')
   })
   public carreras:any;
@@ -34,11 +34,13 @@ export class UserAddComponent implements OnInit {
     })
   }
 
-  postForm(form:IUser){
-    this.userService.postUser(form).subscribe(data=>{
-      console.log(data);
-      this.router.navigate(['teacher/maintenance']);
-    })
+  postForm(form:IUser2){
+     form.role = Number(form.role)
+     console.log(form);
+    //  this.userService.postUser(form).subscribe(data=>{
+    //   console.log(data);
+    //   this.router.navigate(['teacher/maintenance']);
+    // })
     
   }
 
