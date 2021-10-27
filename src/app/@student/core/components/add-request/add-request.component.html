@@ -1,0 +1,94 @@
+<ng-template #contenido let-modal>
+  <div class="modal-header">
+    <h4>Solicitar Tema</h4>
+    <button class="btn btn-danger" aria-label="close" type="button" (click)="modal.dismiss()"><i
+        class="fas fa-times"></i></button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <h6 class="lead">Datos Sobre el/los Estudiantes</h6>
+      <hr />
+      <div class="row mb-2">
+        <div class="col-6">
+          <label for="carrera" class="form-label">Carrera</label>
+          <select class="form-select" id="carrera" (change)="onChange($event)" name="carrera">
+            <option value="" selected disabled hidden>Seleccione su carrera</option>
+            <option *ngFor="let carrera of carreras" value="{{carrera.id}}">
+              {{carrera.carrera}}</option>
+          </select>
+        </div>
+        <div class="col-6">
+          <label for="tema" class="form-label">Tema</label>
+          <select class="form-select" id="tema" *ngIf="temas" name="tema">
+            <option value="" selected disabled hidden>Seleccione un tema</option>
+            <option *ngFor="let tema of temas" value="{{tema.id}}">{{tema.tema}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="mb-1">
+        <label for="estudiante" class="form-label">Estudiantes </label>
+        <div class="form-text">(Max 3)</div>
+        <div *ngFor="let student of students; let i = index" class="mb-2">
+          <div class="mt-1 section-add">
+            <input type="text" class="form-control" id="estudiante_{{i}}" placeholder="Nombre completo del estudiante"
+              [(ngModel)]="student.name" name="estudiante_{{i}}" />
+            <button class="btn btn-danger ml-1" type="button" (click)="removeValue(i)" *ngIf="i>0"><i
+                class="fas fa-times"></i></button>
+          </div>
+        </div>
+        <div class="d-grid gap-2 col-6 mx-auto mt-1" *ngIf="students.length < 3">
+          <button class="btn btn-primary" type="button" (click)="addValue()"><i class="fas fa-plus"></i></button>
+        </div>
+      </div>
+      <h6 class="lead mt-4">Datos Sobre el asesor</h6>
+      <hr />
+      <div class="row mb-2">
+        <div class="col-6">
+          <label for="asesor" class="form-label">Asesor</label>
+          <input type="text" class="form-control" name="asesor" id="asesor" placeholder="Nombre completo" />
+        </div>
+        <div class="col-6">
+          <label for="telefono" class="form-label">Telefono</label>
+          <input type="text" class="form-control" name="telefono" id="telefono" placeholder="Telefono" />
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col-6">
+          <label for="nivel" class="form-label">Nivel academico</label>
+          <input type="text" class="form-control" name="nivel" id="nivel" placeholder="Nivel academico" />
+        </div>
+        <div class="col-6">
+          <label for="email" class="form-label">Correo Electronico</label>
+          <input type="email" class="form-control" name="email" id="email" placeholder="Correo electronico" />
+        </div>
+      </div>
+      <div class="mb-1">
+        <div>
+          <label for="labora" class="form-label">Institucion donde labora</label>
+          <input type="text" class="form-control" name="labora" id="labora" placeholder="Institucion" />
+        </div>
+      </div>
+      <h6 class="lead mt-4">Datos del proyecto</h6>
+      <hr />
+      <div class="mb-1">
+        <label for="datosproyecto" class="form-label">Escriba sobre el proyecto</label>
+        <textarea class="form-control" id="datosproyecto" rows="3"></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="linea" class="form-label">Linea de Investigacion</label>
+        <select class="form-select" id="linea" name="linea">
+          <option selected>Elige una linea de investigacion</option>
+          <option *ngFor="let linea of lineas" value="{{linea.id}}">{{linea.linea}}</option>
+        </select>
+      </div>
+      <div class="d-grid gap-2 col-6 mx-auto">
+        <button class="btn btn-success">Guardar<i class="fas fa-save"></i></button>
+        <button class="btn btn-danger" aria-label="close" type="button" (click)="modal.dismiss()">Cancelar <i
+            class="fas fa-times"></i></button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<button class="btn btn-primary" (click)="modal.open(contenido, { size: 'lg' })">Solicitar tema<i
+    class="fas fa-plus"></i></button>
