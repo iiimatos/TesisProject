@@ -40,6 +40,7 @@ export interface ISolitud {
   carrera_id: ICarrera;
   linea_investigacion: ILineaInvestigacion;
   tema_id: ITema;
+  datosProyecto: string;
   usuario_id: Array<IUser>;
   created_at: Date;
   updated_at: Date;

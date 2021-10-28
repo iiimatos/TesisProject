@@ -5,6 +5,7 @@
 .content {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin: 5px 15px;
 
   > p {
@@ -12,6 +13,11 @@
   }
 }
 
-.fas {
+.fas2 {
   color: red !important;
+}
+
+.nav-tabs,
+.bg {
+  background-color: white !important;
 }

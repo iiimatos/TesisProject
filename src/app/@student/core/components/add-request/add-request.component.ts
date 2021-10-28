@@ -15,10 +15,11 @@ import { ICarrera } from './../../../../@core/models/carrera.interface';
 export class AddRequestComponent implements OnInit {
   constructor(public modal: NgbModal, private carreraService: CarreraService) {}
 
-  students: Array<{ name: string }> = [{ name: '' }];
+  students: Array<{ id: string }> = [{ id: '' }];
   carreras: Array<ICarrera> = [];
   temas: Array<ITema> = [];
   lineas: Array<ILineaInvestigacion> = [];
+  select: boolean = true;
 
   ngOnInit(): void {
     this.carreraService.getAllCarreras().subscribe((data) => {
@@ -34,7 +35,7 @@ export class AddRequestComponent implements OnInit {
 
   addValue() {
     if (this.students.length < 3) {
-      this.students.push({ name: '' });
+      this.students.push({ id: '' });
     }
   }
 
@@ -50,5 +51,9 @@ export class AddRequestComponent implements OnInit {
       .subscribe((data) => {
         this.lineas = data;
       });
+  }
+
+  changeOption(value: boolean) {
+    this.select = value;
   }
 }

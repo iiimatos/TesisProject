@@ -19,10 +19,19 @@
         </div>
         <div class="col-6">
           <label for="tema" class="form-label">Tema</label>
-          <select class="form-select" id="tema" *ngIf="temas" name="tema">
-            <option value="" selected disabled hidden>Seleccione un tema</option>
-            <option *ngFor="let tema of temas" value="{{tema.id}}">{{tema.tema}}</option>
-          </select>
+          <div class="section-add" *ngIf="select">
+            <select class="form-select" id="tema" *ngIf="temas" name="tema">
+              <option value="" selected disabled hidden>Seleccione un tema</option>
+              <option *ngFor="let tema of temas" value="{{tema.id}}">{{tema.tema}}</option>
+            </select>
+            <button class="btn btn-primary ml-1" (click)="changeOption(false)" type="button"><i
+                class="fas fa-pencil-alt"></i></button>
+          </div>
+          <div class="section-add" *ngIf="!select">
+            <input type="text" class="form-control" id="tema" name="tema" placeholder="Tema de su preferencia" />
+            <button class="btn btn-success ml-1" (click)="changeOption(true)" type="button"><i
+                class="fas fa-exchange-alt"></i></button>
+          </div>
         </div>
       </div>
       <div class="mb-1">

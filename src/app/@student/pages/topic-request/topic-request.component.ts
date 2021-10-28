@@ -33,7 +33,9 @@ export class TopicRequestComponent implements OnInit {
   }
 
   editModal(id: number) {
-    const ref = this.modalService.open(EditRequestComponent);
+    const ref = this.modalService.open(EditRequestComponent, {
+      size: 'lg',
+    });
     ref.componentInstance.solicitudId = id;
     ref.result.then(
       (yes) => {
@@ -47,7 +49,9 @@ export class TopicRequestComponent implements OnInit {
 
   viewModal(id: number) {
     // console.log(id);
-    const ref = this.modalService.open(ViewRequestComponent);
+    const ref = this.modalService.open(ViewRequestComponent, {
+      size: 'lg',
+    });
     ref.componentInstance.solicitudId = id;
     ref.result.then(
       (yes) => {

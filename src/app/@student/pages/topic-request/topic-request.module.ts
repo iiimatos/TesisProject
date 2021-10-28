@@ -1,3 +1,4 @@
+import { EditRequestComponent } from './../../core/components/edit-request/edit-request.component';
 import { FormsModule } from '@angular/forms';
 import { AddRequestComponent } from './../../core/components/add-request/add-request.component';
 import { NgModule } from '@angular/core';
@@ -9,7 +10,12 @@ import { TopicRequestComponent } from './topic-request.component';
 import { ViewRequestComponent } from '../../core/components/view-request/view-request.component';
 
 @NgModule({
-  declarations: [TopicRequestComponent, AddRequestComponent, ViewRequestComponent],
+  declarations: [
+    TopicRequestComponent,
+    AddRequestComponent,
+    ViewRequestComponent,
+    EditRequestComponent,
+  ],
   imports: [CommonModule, TopicRequestRoutingModule, FormsModule, NgbModule],
 })
 export class TopicRequestModule {}

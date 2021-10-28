@@ -11,7 +11,7 @@ import { SolicitudService } from 'src/app/@core/services/solicitud.service';
 })
 export class ViewRequestComponent implements OnInit {
   solicitudId: number = 0;
-  solicitudes: ISolitud | undefined;
+  solicitud: ISolitud | undefined;
 
   constructor(
     public modal: NgbActiveModal,
@@ -22,8 +22,8 @@ export class ViewRequestComponent implements OnInit {
     this.solicitudService
       .getAllByIdAndUsers(this.solicitudId)
       .subscribe((data) => {
-        this.solicitudes = data;
-        console.log(data);
+        this.solicitud = data;
+        console.log(this.solicitud);
       });
   }
 }

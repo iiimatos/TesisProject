@@ -1,6 +1,11 @@
-import { ITema, ICarrera } from './../../../@core/models/carrera.interface';
+import {
+  ITema,
+  ICarrera,
+  ISolitud,
+} from './../../../@core/models/carrera.interface';
 import { CarreraService } from './../../../@core/services/carrera.service';
 import { Component, OnInit } from '@angular/core';
+import { SolicitudService } from 'src/app/@core/services/solicitud.service';
 
 @Component({
   selector: 'app-topic-bank',
@@ -9,7 +14,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TopicBankComponent implements OnInit {
   active = 1;
-  constructor(private carreraService: CarreraService) {}
+  constructor(
+    private carreraService: CarreraService,
+    private solicitudService: SolicitudService
+  ) {}
 
   temas: Array<ITema> = [];
   carreras: Array<ICarrera> = [];
@@ -38,4 +46,10 @@ export class TopicBankComponent implements OnInit {
       this.getAllTemas();
     }
   }
+
+  //temas - preaprobados
+  solicitudes: Array<ISolitud> = [];
+  getAllProyectosEnCurso() {}
+
+  getAllProyectTerminados() {}
 }

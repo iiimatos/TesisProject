@@ -1,10 +1,32 @@
 <div class="modal-header">
-  <h4>Ver solicitud</h4>
+  <h4>Ver solicitud - {{solicitud.tema_id.tema}}</h4>
   <button class="btn btn-danger" aria-label="close" type="button" (click)="modal.dismiss()"><i
       class="fas fa-times"></i></button>
 </div>
 <div class="modal-body">
-
+  <div class="row">
+    <div class="col-6">
+      <h6 class="lead">Acerca de/los Estudiates</h6>
+      <hr />
+      <div class="m-1">
+        <div *ngFor="let user of solicitud.usuario_id">
+          <p class="name">{{user.nombre}} {{user.apellido}} - <span class="email">{{user.email}}</span></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <h6 class="lead">Datos sobre el acesor</h6>
+      <hr />
+      <p class="name">{{solicitud.asesor_id.nombre}} - <span class="email">{{solicitud.asesor_id.correo}}</span></p>
+      <p class="name">Numero Telefonico: <span class="telefono">{{solicitud.asesor_id.telefono}}</span></p>
+    </div>
+  </div>
+  <div class="m-1">
+    <h6 class="lead">Datos del proyecto</h6>
+    <hr />
+    <p class="m-1">{{solicitud.datosProyecto}}</p>
+    <p class="text-right">Fecha de creacion: {{solicitud.created_at | date:"dd/MM/yy"}}</p>
+  </div>
 </div>
 <div class="modal-footer">
   <div class="d-grid gap-2 col-6 mx-auto"><button class="btn btn-danger" aria-label="close" type="button"
