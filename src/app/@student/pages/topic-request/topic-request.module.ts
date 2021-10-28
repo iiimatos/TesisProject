@@ -6,9 +6,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { TopicRequestRoutingModule } from './topic-request-routing.module';
 import { TopicRequestComponent } from './topic-request.component';
+import { ViewRequestComponent } from '../../core/components/view-request/view-request.component';
 
 @NgModule({
-  declarations: [TopicRequestComponent, AddRequestComponent],
+  declarations: [TopicRequestComponent, AddRequestComponent, ViewRequestComponent],
   imports: [CommonModule, TopicRequestRoutingModule, FormsModule, NgbModule],
 })
 export class TopicRequestModule {}

@@ -16,18 +16,18 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Red 5g</td>
-        <td>Ingenieria de software</td>
-        <td>Ivan matos, Rafael</td>
-        <td>10/25/2021</td>
+      <tr *ngFor="let solicitud of solicitudes; index as i">
+        <th scope="row">{{i + 1}}</th>
+        <td>{{solicitud.tema_id.tema}}</td>
+        <td>{{solicitud.carrera_id.carrera}}</td>
+        <td>{{names[i]}}</td>
+        <td>{{solicitud.created_at | date:"dd/MM/yy"}}</td>
         <td>Aprobado</td>
         <td>
-          <button class="btn btn-primary">
+          <button class="btn btn-primary" (click)="viewModal(solicitud.id)">
             <i class="far fa-eye"></i>
           </button>
-          <button class="btn btn-dark ml-1">
+          <button class="btn btn-dark ml-1" (click)="editModal(solicitud.id)">
             <i class="fas fa-edit"></i>
           </button>
           <button class="btn btn-success mx-1">

@@ -1,15 +1,15 @@
+import { ISolitud } from './../../../../@core/models/carrera.interface';
+import { AuthService } from 'src/app/@core/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { ISolitud } from 'src/app/@core/models/carrera.interface';
-import { AuthService } from 'src/app/@core/services/auth.service';
 import { SolicitudService } from 'src/app/@core/services/solicitud.service';
 
 @Component({
-  selector: 'app-edit-request',
-  templateUrl: './edit-request.component.html',
-  styleUrls: ['./edit-request.component.scss'],
+  selector: 'app-view-request',
+  templateUrl: './view-request.component.html',
+  styleUrls: ['./view-request.component.scss'],
 })
-export class EditRequestComponent implements OnInit {
+export class ViewRequestComponent implements OnInit {
   solicitudId: number = 0;
   solicitudes: ISolitud | undefined;
 
@@ -23,6 +23,7 @@ export class EditRequestComponent implements OnInit {
       .getAllByIdAndUsers(this.solicitudId)
       .subscribe((data) => {
         this.solicitudes = data;
+        console.log(data);
       });
   }
 }
