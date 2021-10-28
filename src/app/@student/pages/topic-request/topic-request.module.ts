@@ -8,6 +8,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TopicRequestRoutingModule } from './topic-request-routing.module';
 import { TopicRequestComponent } from './topic-request.component';
 import { ViewRequestComponent } from '../../core/components/view-request/view-request.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,12 @@ import { ViewRequestComponent } from '../../core/components/view-request/view-re
     ViewRequestComponent,
     EditRequestComponent,
   ],
-  imports: [CommonModule, TopicRequestRoutingModule, FormsModule, NgbModule],
+  imports: [
+    CommonModule,
+    TopicRequestRoutingModule,
+    NgbModule,
+    NgSelectModule,
+    FormsModule,
+  ],
 })
 export class TopicRequestModule {}

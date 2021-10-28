@@ -35,18 +35,12 @@
     </div>
     <div class="mb-1">
       <label for="estudiante" class="form-label">Estudiantes </label>
-      <div class="form-text">(Max 3)</div>
-      <div *ngFor="let student of students; let i = index" class="mb-2">
-        <div class="mt-1 section-add">
-          <input type="text" class="form-control" id="estudiante_{{i}}" placeholder="Nombre completo del estudiante"
-            [(ngModel)]="student.name" name="estudiante_{{i}}" />
-          <button class="btn btn-danger ml-1" type="button" (click)="removeValue(i)" *ngIf="i>0"><i
-              class="fas fa-times"></i></button>
-        </div>
-      </div>
-      <div class="d-grid gap-2 col-6 mx-auto mt-1" *ngIf="students.length < 3">
-        <button class="btn btn-primary" type="button" (click)="addValue()"><i class="fas fa-plus"></i></button>
-      </div>
+      <ng-select [(ngModel)]="selectedStudents" bindLabel="name" [ngModelOptions]="{standalone: true}"
+        placeholder="Selecciona los estudiantes" [multiple]="true" [maxSelectedItems]="3">
+        <ng-option *ngFor="let student of listStudents" [value]="student.id">{{student.nombre}} {{student.apellido}}
+        </ng-option>
+      </ng-select>
+      <div class="form-text mt-1 text-right">(Max 3)</div>
     </div>
     <h6 class="lead mt-4">Datos Sobre el asesor</h6>
     <hr />

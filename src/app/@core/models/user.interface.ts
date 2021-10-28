@@ -8,6 +8,7 @@ export interface IUser {
   role: IRole;
   blocked: boolean;
   carrera_id: ICarrera;
+  asigando: boolean;
 }
 
 export interface IMeData {

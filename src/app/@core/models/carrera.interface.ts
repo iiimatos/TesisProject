@@ -44,4 +44,5 @@ export interface ISolitud {
   usuario_id: Array<IUser>;
   created_at: Date;
   updated_at: Date;
+  published_at: Date;
 }

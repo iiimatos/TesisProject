@@ -9,6 +9,8 @@ import {
 } from 'src/app/@core/models/carrera.interface';
 import { AuthService } from 'src/app/@core/services/auth.service';
 import { SolicitudService } from 'src/app/@core/services/solicitud.service';
+import { IUser } from 'src/app/@core/models/user.interface';
+import { UserService } from 'src/app/@core/services/user.service';
 
 @Component({
   selector: 'app-edit-request',
@@ -23,11 +25,14 @@ export class EditRequestComponent implements OnInit {
   temas: Array<ITema> = [];
   lineas: Array<ILineaInvestigacion> = [];
   select: boolean = true;
+  listStudents: Array<IUser> = [];
+  selectedStudents: Array<{ id: string }> = [];
 
   constructor(
     public modal: NgbActiveModal,
     private solicitudService: SolicitudService,
-    private carreraService: CarreraService
+    private carreraService: CarreraService,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -38,6 +43,9 @@ export class EditRequestComponent implements OnInit {
       });
     this.carreraService.getAllCarreras().subscribe((data) => {
       this.carreras = data;
+    });
+    this.userService.getAllUsersNotAsignados().subscribe((data) => {
+      this.listStudents = data;
     });
   }
 

@@ -1,3 +1,5 @@
+import { IUser } from 'src/app/@core/models/user.interface';
+import { UserService } from 'src/app/@core/services/user.service';
 import {
   ILineaInvestigacion,
   ITema,
@@ -13,9 +15,15 @@ import { ICarrera } from './../../../../@core/models/carrera.interface';
   styleUrls: ['./add-request.component.scss'],
 })
 export class AddRequestComponent implements OnInit {
-  constructor(public modal: NgbModal, private carreraService: CarreraService) {}
+  constructor(
+    public modal: NgbModal,
+    private carreraService: CarreraService,
+    private userService: UserService
+  ) {}
 
   students: Array<{ id: string }> = [{ id: '' }];
+  listStudents: Array<IUser> = [];
+  selectedStudents: Array<{ id: string }> = [];
   carreras: Array<ICarrera> = [];
   temas: Array<ITema> = [];
   lineas: Array<ILineaInvestigacion> = [];
@@ -24,6 +32,9 @@ export class AddRequestComponent implements OnInit {
   ngOnInit(): void {
     this.carreraService.getAllCarreras().subscribe((data) => {
       this.carreras = data;
+    });
+    this.userService.getAllUsersNotAsignados().subscribe((data) => {
+      this.listStudents = data;
     });
   }
 
@@ -55,5 +66,9 @@ export class AddRequestComponent implements OnInit {
 
   changeOption(value: boolean) {
     this.select = value;
+  }
+
+  save() {
+    console.log(this.selectedStudents);
   }
 }
