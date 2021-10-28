@@ -27,7 +27,8 @@
         <ng-template #elseBlock>
           <td>No activo</td>
         </ng-template>
-        <td>{{user.carrera_id.carrera}}</td>
+        <td>{{user.carrera_id ? user.carrera_id.carrera : "No detectado"}}</td>
+        
         <td>
           <button class="btn btn-primary">
             <i class="far fa-eye"></i>
@@ -35,7 +36,7 @@
           <button (click)="editarUsuario(user.id)" class="btn btn-success mx-3">
             <i class="fas fa-edit"></i>
           </button>
-          <button class="btn btn-danger">
+          <button (click)="deleteUsuario(user.id)" class="btn btn-danger">
             <i class="fas fa-trash-alt"></i>
           </button>
         </td>

@@ -17,18 +17,28 @@ export class MaintenanceComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getAllUsers().subscribe((data: any )=>{
       this.users = data;
-      console.log(data);
     })
     
   }
 
+  deleteUsuario(id:any){
+    this.userService.deleteUser(id).subscribe(data=>{
+      console.log(data);
+      this.router.navigate(['teacher/maintenance/'])
+    })
+    
+
+  }
+
   editarUsuario(id:any){
     this.router.navigate(['teacher/maintenance/user-edit/', id])
-    
+
   }
 
   nuevoUsuario(){
     this.router.navigate(['teacher/maintenance/user-add/'])
   }
+
+  
 
 }

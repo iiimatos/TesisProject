@@ -11,7 +11,7 @@ import { IUser } from 'src/app/@core/models/user.interface';
   styleUrls: ['./user-edit.component.scss'],
 })
 export class UserEditComponent implements OnInit {
-  public datosUsuarios: any;
+  public datosUsuarios: IUser;
   public carreras: any;
   public roles: any;
   editarForm = new FormGroup({
@@ -32,26 +32,31 @@ export class UserEditComponent implements OnInit {
 
   ngOnInit(): void {
     let userid = this.activateRoute.snapshot.paramMap.get('id');
-    this.carreraServices.getAllRoles().subscribe((data) => {
+    this.userService.getAllRoles().subscribe((data) => {
       this.roles = data.roles;
-      console.log(this.roles);
     });
-    this.carreraServices.getAllCarreras().subscribe((data) => {
+    this.userService.getAllCareers().subscribe((data) => {
       this.carreras = data;
     });
     this.userService.getUserById(userid).subscribe((data) => {
       this.datosUsuarios = data;
-      console.log(this.datosUsuarios);
       this.editarForm.setValue({
         id: userid,
         nombre: this.datosUsuarios.nombre,
         apellido: this.datosUsuarios.apellido,
         username: this.datosUsuarios.username,
         email: this.datosUsuarios.email,
-        role: this.datosUsuarios.role,
-        carrera: this.datosUsuarios.carrera_id,
+        role: this.datosUsuarios.role.id,
+        carrera: this.datosUsuarios.carrera_id.id,
       });
-      console.log(this.editarForm.value);
+    });
+  }
+
+  postForm(form: IUser) {
+    const datosUsuarios = form;
+    const userid = this.datosUsuarios?.id;
+    this.userService.putUser(form, userid).subscribe((data) => {
+      this.router.navigate(['teacher/maintenance']);
     });
   }
 
