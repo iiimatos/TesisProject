@@ -1,5 +1,5 @@
 import { EditRequestComponent } from './../../core/components/edit-request/edit-request.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddRequestComponent } from './../../core/components/add-request/add-request.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -23,6 +23,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     NgbModule,
     NgSelectModule,
     FormsModule,
+    ReactiveFormsModule,
   ],
 })
 export class TopicRequestModule {}

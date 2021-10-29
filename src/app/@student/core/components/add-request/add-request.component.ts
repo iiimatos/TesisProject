@@ -1,3 +1,4 @@
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { IUser } from 'src/app/@core/models/user.interface';
 import { UserService } from 'src/app/@core/services/user.service';
 import {
@@ -18,8 +19,11 @@ export class AddRequestComponent implements OnInit {
   constructor(
     public modal: NgbModal,
     private carreraService: CarreraService,
-    private userService: UserService
-  ) {}
+    private userService: UserService,
+    private formBuilder: FormBuilder
+  ) {
+    this.buildForm();
+  }
 
   students: Array<{ id: string }> = [{ id: '' }];
   listStudents: Array<IUser> = [];
@@ -29,12 +33,29 @@ export class AddRequestComponent implements OnInit {
   lineas: Array<ILineaInvestigacion> = [];
   select: boolean = true;
 
+  form: FormGroup;
+
   ngOnInit(): void {
     this.carreraService.getAllCarreras().subscribe((data) => {
       this.carreras = data;
     });
     this.userService.getAllUsersNotAsignados().subscribe((data) => {
       this.listStudents = data;
+    });
+  }
+
+  private buildForm() {
+    this.form = this.formBuilder.group({
+      carrera_id: ['', [Validators.required]],
+      tema_id: ['', [Validators.required]],
+      usuario_id: [[], [Validators.required]],
+      nombre: ['', [Validators.required]],
+      telefono: ['', [Validators.required]],
+      nivelAcademico: ['', [Validators.required]],
+      correo: ['', [Validators.required, Validators.email]],
+      institucionLabora: ['', [Validators.required]],
+      datosProyecto: ['', [Validators.required, Validators.maxLength(200)]],
+      linea_investigacion: ['', [Validators.required]],
     });
   }
 
@@ -66,9 +87,16 @@ export class AddRequestComponent implements OnInit {
 
   changeOption(value: boolean) {
     this.select = value;
+    this.form.controls.tema_id.setValue('');
   }
 
-  save() {
-    console.log(this.selectedStudents);
+  save(event: Event) {
+    event.preventDefault();
+    this.form.controls.usuario_id.setValue(
+      this.selectedStudents.map((value) => String(value))
+    );
+    if (this.form.valid) {
+      console.log('funcionna');
+    }
   }
 }

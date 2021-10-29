@@ -21,6 +21,7 @@ export class TopicBankComponent implements OnInit {
 
   temas: Array<ITema> = [];
   carreras: Array<ICarrera> = [];
+  temaSearch = '';
 
   ngOnInit(): void {
     this.getAllTemas();

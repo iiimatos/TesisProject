@@ -5,22 +5,23 @@
         class="fas fa-times"></i></button>
   </div>
   <div class="modal-body">
-    <form>
+    <form [formGroup]="form" (ngSubmit)="save($event)">
       <h6 class="lead">Datos Sobre el/los Estudiantes</h6>
       <hr />
       <div class="row mb-2">
         <div class="col-6">
-          <label for="carrera" class="form-label">Carrera</label>
-          <select class="form-select" id="carrera" (change)="onChange($event)" name="carrera">
+          <label for="carrera_id" class="form-label">Carrera</label>
+          <select class="form-select" id="carrera_id" formControlName="carrera_id" (change)="onChange($event)"
+            name="carrera_id">
             <option value="" selected disabled hidden>Seleccione su carrera</option>
             <option *ngFor="let carrera of carreras" value="{{carrera.id}}">
               {{carrera.carrera}}</option>
           </select>
         </div>
         <div class="col-6">
-          <label for="tema" class="form-label">Tema</label>
+          <label for="tema_id" class="form-label">Tema</label>
           <div class="section-add" *ngIf="select">
-            <select class="form-select" id="tema" *ngIf="temas" name="tema">
+            <select class="form-select" id="tema" formControlName="tema_id" *ngIf="temas" name="tema_id">
               <option value="" selected disabled hidden>Seleccione un tema</option>
               <option *ngFor="let tema of temas" value="{{tema.id}}">{{tema.tema}}</option>
             </select>
@@ -28,7 +29,8 @@
                 class="fas fa-pencil-alt"></i></button>
           </div>
           <div class="section-add" *ngIf="!select">
-            <input type="text" class="form-control" id="tema" name="tema" placeholder="Tema de su preferencia" />
+            <input type="text" class="form-control" formControlName="tema_id" id="tema_id" name="tema_id"
+              placeholder="Tema de su preferencia" />
             <button class="btn btn-success ml-1" (click)="changeOption(true)" type="button"><i
                 class="fas fa-exchange-alt"></i></button>
           </div>
@@ -38,7 +40,8 @@
         <label for="estudiante" class="form-label">Estudiantes </label>
         <ng-select [(ngModel)]="selectedStudents" bindLabel="name" [ngModelOptions]="{standalone: true}"
           placeholder="Selecciona los estudiantes" [multiple]="true" [maxSelectedItems]="3">
-          <ng-option *ngFor="let student of listStudents" [value]="student.id">{{student.nombre}} {{student.apellido}}
+          <ng-option *ngFor="let student of listStudents" [value]="student.id">{{student.nombre}} {{student.apellido}} -
+            {{student.username}}
           </ng-option>
         </ng-select>
         <div class="form-text mt-1 text-right">(Max 3)</div>
@@ -48,44 +51,52 @@
       <div class="row mb-2">
         <div class="col-6">
           <label for="asesor" class="form-label">Asesor</label>
-          <input type="text" class="form-control" name="asesor" id="asesor" placeholder="Nombre completo" />
+          <input type="text" formControlName="nombre" class="form-control" name="asesor" id="asesor"
+            placeholder="Nombre completo" />
         </div>
         <div class="col-6">
           <label for="telefono" class="form-label">Telefono</label>
-          <input type="text" class="form-control" name="telefono" id="telefono" placeholder="Telefono" />
+          <input type="text" formControlName="telefono" class="form-control" name="telefono" id="telefono"
+            placeholder="Telefono" />
         </div>
       </div>
       <div class="row mb-2">
         <div class="col-6">
-          <label for="nivel" class="form-label">Nivel academico</label>
-          <input type="text" class="form-control" name="nivel" id="nivel" placeholder="Nivel academico" />
+          <label for="nivelAcademico" class="form-label">Nivel academico</label>
+          <input type="text" class="form-control" formControlName="nivelAcademico" name="nivelAcademico"
+            id="nivelAcademico" placeholder="Nivel academico" />
         </div>
         <div class="col-6">
-          <label for="email" class="form-label">Correo Electronico</label>
-          <input type="email" class="form-control" name="email" id="email" placeholder="Correo electronico" />
+          <label for="correo" class="form-label">Correo Electronico</label>
+          <input type="email" class="form-control" formControlName="correo" name="correo" id="correo"
+            placeholder="Correo electronico" />
         </div>
       </div>
       <div class="mb-1">
         <div>
-          <label for="labora" class="form-label">Institucion donde labora</label>
-          <input type="text" class="form-control" name="labora" id="labora" placeholder="Institucion" />
+          <label for="institucionLabora" class="form-label">Institucion donde labora</label>
+          <input type="text" class="form-control" formControlName="institucionLabora" name="institucionLabora"
+            id="institucionLabora" placeholder="Institucion" />
         </div>
       </div>
       <h6 class="lead mt-4">Datos del proyecto</h6>
       <hr />
       <div class="mb-1">
-        <label for="datosproyecto" class="form-label">Escriba sobre el proyecto</label>
-        <textarea class="form-control" id="datosproyecto" rows="3"></textarea>
+        <label for="datosProyecto" class="form-label">Escriba sobre el proyecto</label>
+        <textarea class="form-control" formControlName="datosProyecto" id="datosProyecto" name="datosProyecto"
+          rows="3"></textarea>
       </div>
       <div class="mb-3">
-        <label for="linea" class="form-label">Linea de Investigacion</label>
-        <select class="form-select" id="linea" name="linea">
+        <label for="linea_investigacion" class="form-label">Linea de Investigacion</label>
+        <select class="form-select" formControlName="linea_investigacion" id="linea_investigacion"
+          name="linea_investigacion">
           <option selected>Elige una linea de investigacion</option>
           <option *ngFor="let linea of lineas" value="{{linea.id}}">{{linea.linea}}</option>
         </select>
       </div>
       <div class="d-grid gap-2 col-6 mx-auto">
-        <button class="btn btn-success" (click)="save()">Guardar<i class="fas fa-save"></i></button>
+        <!-- [disabled]="form.invalid" -->
+        <button class="btn btn-success" type="submit">Guardar<i class="fas fa-save"></i></button>
         <button class="btn btn-danger" aria-label="close" type="button" (click)="modal.dismiss()">Cancelar <i
             class="fas fa-times"></i></button>
       </div>
