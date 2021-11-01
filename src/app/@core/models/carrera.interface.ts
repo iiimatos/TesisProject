@@ -16,14 +16,14 @@ export interface ITema {
 }
 
 export interface IAsesor {
-  id: number;
+  id?: number;
   nombre: string;
   institucionLabora: string;
   nivelAcademico: string;
   correo: string;
   telefono: string;
-  created_at: Date;
-  updated_at: Date;
+  created_at?: Date;
+  updated_at?: Date;
 }
 
 export interface ILineaInvestigacion {
@@ -35,14 +35,13 @@ export interface ILineaInvestigacion {
 }
 
 export interface ISolitud {
-  id: number;
+  id?: number;
   asesor_id: IAsesor;
   carrera_id: ICarrera;
   linea_investigacion: ILineaInvestigacion;
   tema_id: ITema;
   datosProyecto: string;
   usuario_id: Array<IUser>;
-  created_at: Date;
-  updated_at: Date;
-  published_at: Date;
+  created_at?: Date;
+  updated_at?: Date;
 }

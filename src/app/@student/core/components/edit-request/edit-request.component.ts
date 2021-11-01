@@ -1,6 +1,9 @@
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { CarreraService } from './../../../../@core/services/carrera.service';
-import { ICarrera } from './../../../../@core/models/carrera.interface';
+import {
+  ICarrera,
+  IAsesor,
+} from './../../../../@core/models/carrera.interface';
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {
@@ -28,6 +31,7 @@ export class EditRequestComponent implements OnInit {
   listStudents: Array<IUser> = [];
   selectedStudents: Array<{ id: string }> = [];
   form: FormGroup;
+  asesor: IAsesor;
 
   constructor(
     public modal: NgbActiveModal,
@@ -108,6 +112,16 @@ export class EditRequestComponent implements OnInit {
       this.selectedStudents.map((value) => String(value))
     );
     if (this.form.valid) {
+      this.asesor = {
+        correo: this.form.controls['correo'].value,
+        institucionLabora: this.form.controls['institucionLabora'].value,
+        telefono: this.form.controls['telefono'].value,
+        nombre: this.form.controls['nombre'].value,
+        nivelAcademico: this.form.controls['nivelAcademico'].value,
+      };
+      this.solicitudService.createAsesor(this.asesor).subscribe((data) => {
+        console.log(data);
+      });
     }
   }
 }

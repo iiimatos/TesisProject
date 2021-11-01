@@ -1,14 +1,14 @@
 import { ICarrera } from './carrera.interface';
 export interface IUser {
-  id: number;
-  nombre: string;
-  apellido: string;
-  username: string;
-  email: string;
-  role: IRole;
-  blocked: boolean;
-  carrera_id: ICarrera;
-  asigando: boolean;
+  id?: string;
+  nombre?: string;
+  apellido?: string;
+  username?: string;
+  email?: string;
+  role?: IRole;
+  blocked?: boolean;
+  carrera_id?: ICarrera;
+  asigando?: boolean;
 }
 
 export interface IMeData {
