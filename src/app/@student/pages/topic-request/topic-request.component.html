@@ -33,7 +33,7 @@
           <button class="btn btn-success mx-1">
             <i class="fas fa-download"></i>
           </button>
-          <button class="btn btn-danger">
+          <button (click)="delete(solicitud.id, solicitud.asesor_id.id)" class="btn btn-danger">
             <i class="fas fa-trash-alt"></i>
           </button>
         </td>
