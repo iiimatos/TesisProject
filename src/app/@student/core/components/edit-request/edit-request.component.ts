@@ -32,6 +32,7 @@ export class EditRequestComponent implements OnInit {
   selectedStudents: Array<{ id: string }> = [];
   form: FormGroup;
   asesor: IAsesor;
+  solicitud: ISolitud;
 
   constructor(
     public modal: NgbActiveModal,
@@ -119,9 +120,24 @@ export class EditRequestComponent implements OnInit {
         nombre: this.form.controls['nombre'].value,
         nivelAcademico: this.form.controls['nivelAcademico'].value,
       };
-      this.solicitudService.createAsesor(this.asesor).subscribe((data) => {
-        console.log(data);
-      });
+      this.solicitudService
+        .editAsesor(this.asesor, this.solicitudes.asesor_id.id)
+        .subscribe((data) => {
+          this.solicitud = {
+            asesor_id: data.id,
+            carrera_id: this.form.controls['carrera_id'].value,
+            datosProyecto: this.form.controls['datosProyecto'].value,
+            linea_investigacion:
+              this.form.controls['linea_investigacion'].value,
+            tema_id: this.form.controls['tema_id'].value,
+            usuario_id: this.selectedStudents,
+          };
+          this.solicitudService
+            .editSolicitud(this.solicitud, this.solicitudes.id)
+            .subscribe((data) => {
+              console.log(data);
+            });
+        });
     }
   }
 }

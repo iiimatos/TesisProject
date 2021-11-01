@@ -39,6 +39,15 @@ export class SolicitudService {
     return this.http.post(direccion, { ...solicitud }, { headers });
   }
 
+  editSolicitud(solicitud: ISolitud, id: number): Observable<any> {
+    let direccion = this.url + `/solicitudes-temas/${id}`;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getSession().jwt}`,
+    });
+    return this.http.put(direccion, { ...solicitud }, { headers });
+  }
+
   createAsesor(asesor: IAsesor): Observable<any> {
     let direccion = this.url + `/asesors`;
     const headers = new HttpHeaders({
@@ -46,5 +55,14 @@ export class SolicitudService {
       Authorization: `Bearer ${getSession().jwt}`,
     });
     return this.http.post(direccion, { ...asesor }, { headers });
+  }
+
+  editAsesor(asesor: IAsesor, id: number): Observable<any> {
+    let direccion = this.url + `/asesors/${id}`;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getSession().jwt}`,
+    });
+    return this.http.put(direccion, { ...asesor }, { headers });
   }
 }

@@ -90,7 +90,7 @@
         <label for="linea_investigacion" class="form-label">Linea de Investigacion</label>
         <select class="form-select" formControlName="linea_investigacion" id="linea_investigacion"
           name="linea_investigacion">
-          <option selected>Elige una linea de investigacion</option>
+          <option value="" selected disabled hidden>Elige una linea de investigacion</option>
           <option *ngFor="let linea of lineas" value="{{linea.id}}">{{linea.linea}}</option>
         </select>
       </div>
