@@ -7,6 +7,7 @@ const routes: Routes = [
     path: '',
     component: TopicBankComponent,
   },
+  { path: 'project-request', loadChildren: () => import('../../core/components/project-request/project-request.module').then(m => m.ProjectRequestModule) },
 ];
 
 @NgModule({

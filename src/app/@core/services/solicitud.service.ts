@@ -28,4 +28,14 @@ export class SolicitudService {
     });
     return this.http.get(direccion, { headers });
   }
+
+  getAll() : Observable<any>{
+    let direccion = this.url + '/solicitudes-temas?';
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getSession().jwt}`,
+    });
+    return this.http.get(direccion, { headers });
+  }
+
 }

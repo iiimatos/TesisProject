@@ -3,19 +3,23 @@ import { Router } from '@angular/router';
 import { SolicitudService } from 'src/app/@core/services/solicitud.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: 'app-project-request',
+  templateUrl: './project-request.component.html',
+  styleUrls: ['./project-request.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class ProjectRequestComponent implements OnInit {
+
   public requests:Array<any>=[];
   constructor(private solicitudService:SolicitudService, private router: Router) { }
 
   ngOnInit(): void {
     this.solicitudService.getAll().subscribe(data=>{
+      console.log(data.carrera_id.id);
       this.requests =data;
-      console.log(this.requests)
     })
+    
   }
+
+
 
 }

@@ -16,6 +16,10 @@
         <th scope="col">Opciones</th>
       </tr>
     </thead>
+    
+    <tbody *ngIf="users.length == 0">
+      <td colspan="7" class="text-center">No hay registros...</td>
+    </tbody>
     <tbody>
       <tr *ngFor="let user of users; index as i">
         <th scope="row">{{i + 1}}</th>

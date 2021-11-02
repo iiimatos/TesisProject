@@ -18,7 +18,6 @@ export class MaintenanceComponent implements OnInit {
     this.userService.getAllUsers().subscribe((data: any )=>{
       this.users = data;
     })
-    
   }
 
   deleteUsuario(id:any){

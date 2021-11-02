@@ -18,8 +18,7 @@ export class UserAddComponent implements OnInit {
     username: new FormControl(''),
     password: new FormControl(''),
     email: new FormControl(''),
-    role: new FormControl(0),
-    carrera_id: new FormControl(''),
+    carrera_id: new FormControl(1),
   });
   public carreras: any;
   public roles: any;
