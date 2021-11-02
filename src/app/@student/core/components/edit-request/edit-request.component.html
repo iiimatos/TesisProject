@@ -16,6 +16,11 @@
           <option *ngFor="let carrera of carreras" value="{{carrera.id}}">
             {{carrera.carrera}}</option>
         </select>
+        <div class="mt-2" *ngIf="form.get('carrera_id').errors && form.get('carrera_id').touched">
+          <p class="alert alert-danger" role="alert" *ngIf="form.get('carrera_id').hasError('required')">
+            Este campo es requerido
+          </p>
+        </div>
       </div>
       <div class="col-6">
         <label for="tema_id" class="form-label">Tema</label>
@@ -32,6 +37,11 @@
             placeholder="Tema de su preferencia" />
           <button class="btn btn-success ml-1" (click)="changeOption(true)" type="button"><i
               class="fas fa-exchange-alt"></i></button>
+        </div>
+        <div class="mt-2" *ngIf="form.get('tema_id').errors && form.get('tema_id').touched">
+          <p class="alert alert-danger" role="alert" *ngIf="form.get('tema_id').hasError('required')">
+            Este campo es requerido
+          </p>
         </div>
       </div>
     </div>
@@ -51,11 +61,21 @@
         <label for="asesor" class="form-label">Asesor</label>
         <input type="text" class="form-control" formControlName="nombre" name="asesor" id="asesor"
           placeholder="Nombre completo" />
+        <div class="mt-2" *ngIf="form.get('nombre').errors && form.get('nombre').touched">
+          <p class="alert alert-danger" role="alert" *ngIf="form.get('nombre').hasError('required')">
+            Este campo es requerido
+          </p>
+        </div>
       </div>
       <div class="col-6">
         <label for="telefono" class="form-label">Telefono</label>
         <input type="text" class="form-control" formControlName="telefono" name="telefono" id="telefono"
           placeholder="Telefono" />
+        <div class="mt-2" *ngIf="form.get('telefono').errors && form.get('telefono').touched">
+          <p class="alert alert-danger" role="alert" *ngIf="form.get('telefono').hasError('required')">
+            Este campo es requerido
+          </p>
+        </div>
       </div>
     </div>
     <div class="row mb-2">
@@ -63,11 +83,21 @@
         <label for="nivelAcademico" class="form-label">Nivel academico</label>
         <input type="text" class="form-control" formControlName="nivelAcademico" name="nivelAcademico"
           id="nivelAcademico" placeholder="Nivel academico" />
+        <div class="mt-2" *ngIf="form.get('nivelAcademico').errors && form.get('nivelAcademico').touched">
+          <p class="alert alert-danger" role="alert" *ngIf="form.get('nivelAcademico').hasError('required')">
+            Este campo es requerido
+          </p>
+        </div>
       </div>
       <div class="col-6">
         <label for="correo" class="form-label">Correo Electronico</label>
         <input type="email" formControlName="correo" class="form-control" name="correo" id="correo"
           placeholder="Correo electronico" />
+        <div class="mt-2" *ngIf="form.get('correo').errors && form.get('correo').touched">
+          <p class="alert alert-danger" role="alert" *ngIf="form.get('correo').hasError('required')">
+            Este campo es requerido
+          </p>
+        </div>
       </div>
     </div>
     <div class="mb-1">
@@ -75,6 +105,11 @@
         <label for="institucionLabora" class="form-label">Institucion donde labora</label>
         <input type="text" class="form-control" formControlName="institucionLabora" name="institucionLabora"
           id="institucionLabora" placeholder="Institucion" />
+        <div class="mt-2" *ngIf="form.get('institucionLabora').errors && form.get('institucionLabora').touched">
+          <p class="alert alert-danger" role="alert" *ngIf="form.get('institucionLabora').hasError('required')">
+            Este campo es requerido
+          </p>
+        </div>
       </div>
     </div>
     <h6 class="lead mt-4">Datos del proyecto</h6>
@@ -83,6 +118,11 @@
       <label for="datosProyecto" class="form-label">Escriba sobre el proyecto</label>
       <textarea class="form-control" formControlName="datosProyecto" name="datosProyecto" id="datosProyecto"
         rows="3"></textarea>
+      <div class="mt-2" *ngIf="form.get('datosProyecto').errors && form.get('datosProyecto').touched">
+        <p class="alert alert-danger" role="alert" *ngIf="form.get('datosProyecto').hasError('required')">
+          Este campo es requerido
+        </p>
+      </div>
     </div>
     <div class="mb-3">
       <label for="linea_investigacion" class="form-label">Linea de Investigacion</label>
@@ -91,6 +131,11 @@
         <option value="" selected disabled hidden>Elige una linea de investigacion</option>
         <option *ngFor="let linea of lineas" value="{{linea.id}}">{{linea.linea}}</option>
       </select>
+      <div class="mt-2" *ngIf="form.get('linea_investigacion').errors && form.get('linea_investigacion').touched">
+        <p class="alert alert-danger" role="alert" *ngIf="form.get('linea_investigacion').hasError('required')">
+          Este campo es requerido
+        </p>
+      </div>
     </div>
     <div class="d-grid gap-2 col-6 mx-auto">
       <!-- [disabled]="form.invalid" -->
