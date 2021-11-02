@@ -61,7 +61,7 @@ export class AddRequestComponent implements OnInit {
       nivelAcademico: ['', [Validators.required]],
       correo: ['', [Validators.required, Validators.email]],
       institucionLabora: ['', [Validators.required]],
-      datosProyecto: ['', [Validators.required, Validators.maxLength(200)]],
+      datosProyecto: ['', [Validators.required]],
       linea_investigacion: ['', [Validators.required]],
     });
   }

@@ -13,16 +13,29 @@
         <div class="card-header text-center display-4">
           Login
         </div>
-        <div class="card-body">
+        <form class="card-body" [formGroup]="form" (ngSubmit)="login($event)">
           <div class="form-group">
             <label for="email">Matricula o Correo</label>
-            <input type="text" class="form-control" [(ngModel)]="user.identifier" id="identifier"
+            <input type="text" class="form-control" formControlName="identifier" id="identifier"
               placeholder="2021-30-3-0016 o 2021-30-3-0016@correo.com">
+            <div class="mt-2" *ngIf="form.get('identifier').errors && form.get('identifier').touched">
+              <p class="alert alert-danger" role="alert" *ngIf="form.get('identifier').hasError('required')">
+                Este campo es requerido
+              </p>
+            </div>
           </div>
           <div class="form-group">
             <label for="password">Contraseña</label>
-            <input type="password" class="form-control" [(ngModel)]="user.password" id="password"
+            <input type="password" class="form-control" formControlName="password" id="password"
               placeholder="contraseña">
+            <div class="mt-2" *ngIf="form.get('password').errors && form.get('password').touched">
+              <p class="alert alert-danger" role="alert" *ngIf="form.get('password').hasError('required')">
+                Este campo es requerido
+              </p>
+              <p class="alert alert-danger" role="alert" *ngIf="form.get('password').hasError('minlength')">
+                Minimo 6 caracteres
+              </p>
+            </div>
           </div>
           <div class="form-group form-check ml-3">
             <input type="checkbox" class="form-check-input" id="saveUser">
@@ -30,12 +43,12 @@
           </div>
           <div class="form-group text-center">
             <div class="col align-self-center">
-              <button type="submit" class="btn btn-warning form-control" (click)="login()">
+              <button type="submit" class="btn btn-warning form-control">
                 Iniciar Sesion
               </button>
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   </div>
