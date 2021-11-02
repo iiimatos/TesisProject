@@ -64,7 +64,6 @@ export class EditRequestComponent implements OnInit {
         this.selectedStudents = data.usuario_id.map((usuario) =>
           String(`${usuario.nombre} ${usuario.apellido} - ${usuario.username}`)
         );
-        this.onChange(data.carrera_id.id);
         this.form.patchValue({
           carrera_id: data.carrera_id.id,
           tema_id: data.tema_id.id,
@@ -76,6 +75,7 @@ export class EditRequestComponent implements OnInit {
           datosProyecto: data.datosProyecto,
           linea_investigacion: data.linea_investigacion.id,
         });
+        this.valueChange(data.carrera_id.id);
       });
   }
 
@@ -107,17 +107,17 @@ export class EditRequestComponent implements OnInit {
   }
 
   onChange(value: any) {
-    this.carreraService
-      .getTemaByIdCarrera(Number(value.target.value))
-      .subscribe((data) => {
-        this.temas = data;
-      });
+    this.valueChange(Number(value.target.value));
+  }
 
-    this.carreraService
-      .getLineaByIdCarrera(Number(value.target.value))
-      .subscribe((data) => {
-        this.lineas = data;
-      });
+  valueChange(value: number) {
+    this.carreraService.getTemaByIdCarrera(value).subscribe((data) => {
+      this.temas = data;
+    });
+
+    this.carreraService.getLineaByIdCarrera(value).subscribe((data) => {
+      this.lineas = data;
+    });
   }
 
   changeOption(value: boolean) {
