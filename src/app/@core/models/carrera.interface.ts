@@ -54,3 +54,12 @@ export interface ISolitud {
   created_at?: Date;
   updated_at?: Date;
 }
+
+export interface IHistorial {
+  id?: number;
+  observacion?: string;
+  estatus?: IStatus;
+  solicitudes_tema: ISolitud;
+  created_at?: Date;
+  updated_at?: Date;
+}

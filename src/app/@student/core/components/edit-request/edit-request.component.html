@@ -49,7 +49,8 @@
       <label for="estudiante" class="form-label">Estudiantes </label>
       <ng-select [(ngModel)]="selectedStudents" bindLabel="name" [ngModelOptions]="{standalone: true}"
         placeholder="Selecciona los estudiantes" [multiple]="true" [maxSelectedItems]="3">
-        <ng-option *ngFor="let student of listStudents" [value]="student.id">{{student.nombre}} {{student.apellido}}
+        <ng-option *ngFor="let student of listStudents" [value]="student.id">{{student.nombre}} {{student.apellido}} -
+          {{student.username}}
         </ng-option>
       </ng-select>
       <div class="form-text mt-1 text-right">(Max 3)</div>

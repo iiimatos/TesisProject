@@ -8,20 +8,20 @@
       <tr>
         <th scope="col">#</th>
         <th scope="col">Tema</th>
-        <th scope="col">Actividad</th>
+        <th scope="col">Observacion</th>
         <th scope="col">Fecha</th>
         <th scope="col">Usuario</th>
         <th scope="col">Estatus</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Diseño de una red 5g</td>
-        <td>Necesita correcciones</td>
-        <td>20/6/2021</td>
-        <td>estudiante</td>
-        <td>Pediente de aprobacion</td>
+      <tr *ngFor="let historial of historials; index as i">
+        <th scope="row">{{i + 1}}</th>
+        <td>{{historial.solicitudes_tema.tema_id.tema}}</td>
+        <td>{{historial.observacion}}</td>
+        <td>{{historial.created_at | date:"dd/MM/yy"}}</td>
+        <td>{{names[i]}}</td>
+        <td>{{historial.estatus.nombre}}</td>
       </tr>
     </tbody>
   </table>

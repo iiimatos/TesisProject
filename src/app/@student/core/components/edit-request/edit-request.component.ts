@@ -1,4 +1,9 @@
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import {
+  FormGroup,
+  Validators,
+  FormBuilder,
+  FormControl,
+} from '@angular/forms';
 import { CarreraService } from './../../../../@core/services/carrera.service';
 import {
   ICarrera,
@@ -45,20 +50,33 @@ export class EditRequestComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.solicitudService
-      .getAllByIdAndUsers(this.solicitudId)
-      .subscribe((data) => {
-        this.solicitudes = data;
-        console.log(data);
-
-        // this.form.setValue({})
-      });
     this.carreraService.getAllCarreras().subscribe((data) => {
       this.carreras = data;
     });
     this.userService.getAllUsersNotAsignados().subscribe((data) => {
       this.listStudents = data;
     });
+
+    this.solicitudService
+      .getAllByIdAndUsers(this.solicitudId)
+      .subscribe((data) => {
+        this.solicitudes = data;
+        this.selectedStudents = data.usuario_id.map((usuario) =>
+          String(`${usuario.nombre} ${usuario.apellido} - ${usuario.username}`)
+        );
+        this.onChange(data.carrera_id.id);
+        this.form.patchValue({
+          carrera_id: data.carrera_id.id,
+          tema_id: data.tema_id.id,
+          nombre: data.asesor_id.nombre,
+          telefono: data.asesor_id.telefono,
+          nivelAcademico: data.asesor_id.nivelAcademico,
+          correo: data.asesor_id.correo,
+          institucionLabora: data.asesor_id.institucionLabora,
+          datosProyecto: data.datosProyecto,
+          linea_investigacion: data.linea_investigacion.id,
+        });
+      });
   }
 
   private buildForm() {
@@ -138,6 +156,23 @@ export class EditRequestComponent implements OnInit {
               console.log(data);
             });
         });
+    } else {
+      this.validateAllFormFields(this.form);
     }
+  }
+
+  validateAllFormFields(formGroup: FormGroup) {
+    //{1}
+    Object.keys(formGroup.controls).forEach((field) => {
+      //{2}
+      const control = formGroup.get(field); //{3}
+      if (control instanceof FormControl) {
+        //{4}
+        control.markAsTouched({ onlySelf: true });
+      } else if (control instanceof FormGroup) {
+        //{5}
+        this.validateAllFormFields(control); //{6}
+      }
+    });
   }
 }

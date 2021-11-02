@@ -1,5 +1,5 @@
-import { ISolitud } from './../../../@core/models/carrera.interface';
-import { UserService } from 'src/app/@core/services/user.service';
+import { CarreraService } from './../../../@core/services/carrera.service';
+import { IHistorial } from './../../../@core/models/carrera.interface';
 import { SolicitudService } from 'src/app/@core/services/solicitud.service';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/@core/services/auth.service';
@@ -12,22 +12,22 @@ import { AuthService } from 'src/app/@core/services/auth.service';
 export class HomeComponent implements OnInit {
   constructor(
     private solicitudService: SolicitudService,
+    private carreraService: CarreraService,
     private authService: AuthService
   ) {}
-  solicitudes: Array<ISolitud> = [];
+  historials: Array<IHistorial> = [];
   names: Array<string> = [];
 
   ngOnInit(): void {
     this.authService.getMe().subscribe((data) => {
-      this.solicitudService
-        .getMySolicitudPendiente(data.id, '1')
-        .subscribe((data) => {
-          this.solicitudes = data;
-          this.names = this.solicitudes.map((soli) =>
-            soli.usuario_id.map((usuario) => usuario.nombre).join(', ')
-          );
-          console.log(this.solicitudes);
-        });
+      this.carreraService.getMyHistorial(data.id).subscribe((data) => {
+        this.historials = data;
+        this.names = this.historials.map((soli) =>
+          soli.solicitudes_tema.usuario_id
+            .map((usuario) => usuario.nombre)
+            .join(', ')
+        );
+      });
     });
   }
 }

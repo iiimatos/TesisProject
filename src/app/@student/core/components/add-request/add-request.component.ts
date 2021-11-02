@@ -1,4 +1,9 @@
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import {
+  FormGroup,
+  Validators,
+  FormBuilder,
+  FormControl,
+} from '@angular/forms';
 import { IUser } from 'src/app/@core/models/user.interface';
 import { UserService } from 'src/app/@core/services/user.service';
 import {
@@ -124,6 +129,23 @@ export class AddRequestComponent implements OnInit {
           window.location.reload();
         });
       });
+    } else {
+      this.validateAllFormFields(this.form);
     }
+  }
+
+  validateAllFormFields(formGroup: FormGroup) {
+    //{1}
+    Object.keys(formGroup.controls).forEach((field) => {
+      //{2}
+      const control = formGroup.get(field); //{3}
+      if (control instanceof FormControl) {
+        //{4}
+        control.markAsTouched({ onlySelf: true });
+      } else if (control instanceof FormGroup) {
+        //{5}
+        this.validateAllFormFields(control); //{6}
+      }
+    });
   }
 }

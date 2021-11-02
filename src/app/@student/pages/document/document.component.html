@@ -2,11 +2,8 @@
   <div class="alert alert-dark row" role="alert">
     <h2 class="display-4 title col-8">Documentos</h2>
     <div class="input-group mb-3 col-4 mt-2">
-      <input type="text" class="form-control" [(ngModel)]="fileSearch" placeholder="Buscar documentos"
-        aria-label="Recipient's username" aria-describedby="basic-addon2">
-      <div class="input-group-append">
-        <button class="btn btn-primary" (click)="searchFile()" type="button">Buscar</button>
-      </div>
+      <input type="text" class="form-control" [(ngModel)]="fileSearch" (keydown)="searchFile()"
+        placeholder="Buscar documentos" aria-label="Recipient's username" aria-describedby="basic-addon2">
     </div>
   </div>
   <div class="content border bg border-info p-2" *ngFor="let file of files; index as i">
