@@ -118,12 +118,11 @@ export class AddRequestComponent implements OnInit {
           linea_investigacion: this.form.controls['linea_investigacion'].value,
           tema_id: this.form.controls['tema_id'].value,
           usuario_id: this.selectedStudents,
+          estatus_id: { id: '1' },
         };
-        this.solicitudService
-          .createSolicitud(this.solicitud)
-          .subscribe((data) => {
-            console.log(data);
-          });
+        this.solicitudService.createSolicitud(this.solicitud).subscribe((_) => {
+          window.location.reload();
+        });
       });
     }
   }

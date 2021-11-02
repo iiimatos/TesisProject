@@ -29,6 +29,34 @@ export class SolicitudService {
     });
     return this.http.get(direccion, { headers });
   }
+  getMySolicitudPendiente(myId: string, statusId: string): Observable<any> {
+    let direccion =
+      this.url +
+      `/solicitudes-temas?estatus_id.id=${statusId}&usuario_id.id=${myId}`;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getSession().jwt}`,
+    });
+    return this.http.get(direccion, { headers });
+  }
+
+  getSolicitudNotCulminadas(): Observable<any> {
+    let direccion = this.url + `/solicitudes-temas?estatus_id.id_ne=6`;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getSession().jwt}`,
+    });
+    return this.http.get(direccion, { headers });
+  }
+
+  getSolicitudCulminadas(): Observable<any> {
+    let direccion = this.url + `/solicitudes-temas?estatus_id=6`;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getSession().jwt}`,
+    });
+    return this.http.get(direccion, { headers });
+  }
 
   createSolicitud(solicitud: ISolitud): Observable<any> {
     let direccion = this.url + `/solicitudes-temas`;

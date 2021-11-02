@@ -1,3 +1,5 @@
+import { ViewRequestComponent } from './../../core/components/view-request/view-request.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {
   ITema,
   ICarrera,
@@ -16,7 +18,8 @@ export class TopicBankComponent implements OnInit {
   active = 1;
   constructor(
     private carreraService: CarreraService,
-    private solicitudService: SolicitudService
+    private solicitudService: SolicitudService,
+    private modalService: NgbModal
   ) {}
 
   temas: Array<ITema> = [];
@@ -28,6 +31,8 @@ export class TopicBankComponent implements OnInit {
     this.carreraService.getAllCarreras().subscribe((data) => {
       this.carreras = data;
     });
+    this.getAllProyectosEnCurso();
+    this.getAllProyectosCulminados();
   }
 
   getAllTemas() {
@@ -49,8 +54,47 @@ export class TopicBankComponent implements OnInit {
   }
 
   //temas - preaprobados
-  solicitudes: Array<ISolitud> = [];
-  getAllProyectosEnCurso() {}
+  solicitudesNoCuliminadas: Array<ISolitud> = [];
+  names: Array<string> = [];
 
-  getAllProyectTerminados() {}
+  getAllProyectosEnCurso() {
+    this.solicitudService.getSolicitudNotCulminadas().subscribe((data) => {
+      this.solicitudesNoCuliminadas = data;
+      console.log(this.solicitudesNoCuliminadas);
+
+      this.names = this.solicitudesNoCuliminadas.map((soli) =>
+        soli.usuario_id.map((usuario) => usuario.nombre).join(', ')
+      );
+    });
+  }
+
+  //temas - preaprobados
+  solicitudesCuliminadas: Array<ISolitud> = [];
+  namesCulimandos: Array<string> = [];
+
+  getAllProyectosCulminados() {
+    this.solicitudService.getSolicitudCulminadas().subscribe((data) => {
+      this.solicitudesCuliminadas = data;
+
+      this.namesCulimandos = this.solicitudesCuliminadas.map((soli) =>
+        soli.usuario_id.map((usuario) => usuario.nombre).join(', ')
+      );
+    });
+  }
+
+  viewModal(id: number) {
+    // console.log(id);
+    const ref = this.modalService.open(ViewRequestComponent, {
+      size: 'lg',
+    });
+    ref.componentInstance.solicitudId = id;
+    ref.result.then(
+      (yes) => {
+        console.log(yes);
+      },
+      (cancel) => {
+        console.log(cancel);
+      }
+    );
+  }
 }

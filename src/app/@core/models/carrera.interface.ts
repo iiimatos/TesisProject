@@ -34,6 +34,14 @@ export interface ILineaInvestigacion {
   updated_at: Date;
 }
 
+export interface IStatus {
+  id?: string;
+  nombre?: string;
+  published_at?: string;
+  created_by?: string;
+  updated_by?: string;
+}
+
 export interface ISolitud {
   id?: number;
   asesor_id: IAsesor;
@@ -42,6 +50,7 @@ export interface ISolitud {
   tema_id: ITema;
   datosProyecto: string;
   usuario_id: Array<IUser>;
+  estatus_id?: IStatus;
   created_at?: Date;
   updated_at?: Date;
 }

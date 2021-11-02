@@ -32,7 +32,7 @@
     <li [ngbNavItem]="2">
       <a ngbNavLink>Proyectos en curso</a>
       <ng-template ngbNavContent>
-        <!-- <table class="table table-bordered">
+        <table class="table table-bordered">
           <thead>
             <tr>
               <th scope="col">#</th>
@@ -45,13 +45,13 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let solicitud of solicitudes; index as i">
+            <tr *ngFor="let solicitud of solicitudesNoCuliminadas; index as i">
               <th scope="row">{{i + 1}}</th>
               <td>{{solicitud.tema_id.tema}}</td>
               <td>{{solicitud.carrera_id.carrera}}</td>
               <td>{{names[i]}}</td>
               <td>{{solicitud.created_at | date:"dd/MM/yy"}}</td>
-              <td>Aprobado</td>
+              <td>{{solicitud.estatus_id.nombre}}</td>
               <td>
                 <button class="btn btn-primary" (click)="viewModal(solicitud.id)">
                   <i class="far fa-eye"></i>
@@ -59,22 +59,40 @@
               </td>
             </tr>
           </tbody>
-        </table> -->
+        </table>
       </ng-template>
     </li>
     <li [ngbNavItem]="3">
       <a ngbNavLink>Proyecto Culminados</a>
       <ng-template ngbNavContent>
-        <p>Sed commodo, leo at suscipit dictum, quam est porttitor sapien, eget sodales nibh elit id diam. Nulla
-          facilisi.
-          Donec egestas ligula vitae odio interdum aliquet. Duis lectus turpis, luctus eget tincidunt eu, congue et
-          odio.
-          Duis pharetra et nisl at faucibus. Quisque luctus pulvinar arcu, et molestie lectus ultrices et. Sed diam
-          urna,
-          egestas ut ipsum vel, volutpat volutpat neque. Praesent fringilla tortor arcu. Vivamus faucibus nisl enim, nec
-          tristique ipsum euismod facilisis. Morbi ut bibendum est, eu tincidunt odio. Orci varius natoque penatibus et
-          magnis dis parturient montes, nascetur ridiculus mus. Mauris aliquet odio ac lorem aliquet ultricies in eget
-          neque. Phasellus nec tortor vel tellus pulvinar feugiat.</p>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Tema</th>
+              <th scope="col">Carrera</th>
+              <th scope="col">Estudiantes</th>
+              <th scope="col">Fecha</th>
+              <th scope="col">Estatus</th>
+              <th scope="col">Opciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let solicitud of solicitudesCuliminadas; index as i">
+              <th scope="row">{{i + 1}}</th>
+              <td>{{solicitud.tema_id.tema}}</td>
+              <td>{{solicitud.carrera_id.carrera}}</td>
+              <td>{{namesCulimandos[i]}}</td>
+              <td>{{solicitud.created_at | date:"dd/MM/yy"}}</td>
+              <td>{{solicitud.estatus_id.nombre}}</td>
+              <td>
+                <button class="btn btn-primary" (click)="viewModal(solicitud.id)">
+                  <i class="far fa-eye"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </ng-template>
     </li>
   </ul>
