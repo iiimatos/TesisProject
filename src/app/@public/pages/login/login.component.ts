@@ -1,3 +1,4 @@
+import { getMessageRequest } from './../../../@core/utils/message';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ILoginUser } from '../../../@core/models/user.interface';
 import { Component } from '@angular/core';
@@ -49,7 +50,10 @@ export class LoginComponent {
           }
         },
         (error) => {
-          console.log(error.error.data[0].messages[0].message);
+          basicAlert(
+            TYPE_ALERT.ERROR,
+            getMessageRequest(error.error.data[0].messages[0].message)
+          );
         }
       );
     }
