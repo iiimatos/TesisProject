@@ -46,7 +46,10 @@
           </div>
           <div class="form-group text-center">
             <div class="col align-self-center">
-              <button type="submit" class="btn btn-warning form-control">
+              <div *ngIf="loading" class="spinner p-2">
+                <app-spinner></app-spinner>
+              </div>
+              <button type="submit" [disabled]="loading" class="btn btn-warning form-control">
                 Iniciar Sesion
               </button>
             </div>

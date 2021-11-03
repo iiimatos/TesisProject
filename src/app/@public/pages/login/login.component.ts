@@ -1,3 +1,4 @@
+import { validateAllFormFields } from './../../../@core/utils/form';
 import { getMessageRequest } from './../../../@core/utils/message';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ILoginUser } from '../../../@core/models/user.interface';
@@ -22,6 +23,7 @@ export class LoginComponent {
   }
 
   form: FormGroup;
+  loading = false;
 
   private buildForm() {
     this.form = this.formBuilder.group({
@@ -33,6 +35,7 @@ export class LoginComponent {
   login(event: Event) {
     event.preventDefault();
     if (this.form.valid) {
+      this.loading = true;
       const identifier = this.form.controls['identifier'].value;
       const password = this.form.controls['password'].value;
       this.authService.login(identifier, password).subscribe(
@@ -40,7 +43,7 @@ export class LoginComponent {
           if (data.jwt && data.user !== null) {
             basicAlert(TYPE_ALERT.SUCCESS, 'Sesion Iniciada');
             this.authService.setSession(data.jwt);
-
+            this.loading = false;
             if (data.user.role.name === 'Student') {
               this.router.navigate(['/student']);
             } else {
@@ -50,12 +53,15 @@ export class LoginComponent {
           }
         },
         (error) => {
+          this.loading = false;
           basicAlert(
             TYPE_ALERT.ERROR,
             getMessageRequest(error.error.data[0].messages[0].message)
           );
         }
       );
+    } else {
+      validateAllFormFields(this.form);
     }
   }
 }
