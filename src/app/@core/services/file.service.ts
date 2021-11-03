@@ -8,14 +8,14 @@ import { environment } from 'src/environments/environment';
 })
 export class FileService {
   constructor(private http: HttpClient) {}
-  url = `${environment.urlApi}/upload/files`;
+  url = `${environment.urlApi}/upload`;
 
   getAllFiles() {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${getSession().jwt}`,
     });
-    return this.http.get(this.url, { headers });
+    return this.http.get(`${this.url}/files`, { headers });
   }
 
   getSearchFiles(file: string) {
@@ -23,6 +23,21 @@ export class FileService {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${getSession().jwt}`,
     });
-    return this.http.get(`${this.url}?_q=${file}`, { headers });
+    return this.http.get(`${this.url}/files?_q=${file}`, { headers });
+  }
+
+  uploadFiles(formData) {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${getSession().jwt}`,
+    });
+    return this.http.post(this.url, formData, { headers });
+  }
+
+  deleteFiles(id: number) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getSession().jwt}`,
+    });
+    return this.http.delete(`${this.url}/files/${id}`, { headers });
   }
 }

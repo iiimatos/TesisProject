@@ -22,14 +22,14 @@ export class UserService {
     return this.http.get(direccion, { headers });
   }
 
-  getAllUsersNotAsignados(): Observable<any> {
-    let direccion = this.url + '/users?role.name=student&asignado=false';
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${getSession().jwt}`,
-    });
-    return this.http.get(direccion, { headers });
-  }
+  // getAllUsersNotAsignados(): Observable<any> {
+  //   let direccion = this.url + '/users?role.name=student&asignado=false';
+  //   const headers = new HttpHeaders({
+  //     'Content-Type': 'application/json',
+  //     Authorization: `Bearer ${getSession().jwt}`,
+  //   });
+  //   return this.http.get(direccion, { headers });
+  // }
 
   getAllRoles(): Observable<any> {
     let direccion = this.url + '/users-permissions/roles';

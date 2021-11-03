@@ -53,7 +53,7 @@ export class EditRequestComponent implements OnInit {
     this.carreraService.getAllCarreras().subscribe((data) => {
       this.carreras = data;
     });
-    this.userService.getAllUsersNotAsignados().subscribe((data) => {
+    this.userService.getAllUsers().subscribe((data) => {
       this.listStudents = data;
     });
 
@@ -61,9 +61,9 @@ export class EditRequestComponent implements OnInit {
       .getAllByIdAndUsers(this.solicitudId)
       .subscribe((data) => {
         this.solicitudes = data;
-        this.selectedStudents = data.usuario_id.map((usuario) =>
-          String(`${usuario.nombre} ${usuario.apellido} - ${usuario.username}`)
-        );
+        this.selectedStudents = data.usuario_id.map((usuario) => usuario.id);
+        console.log(this.selectedStudents);
+
         this.form.patchValue({
           carrera_id: data.carrera_id.id,
           tema_id: data.tema_id.id,
@@ -131,31 +131,33 @@ export class EditRequestComponent implements OnInit {
       this.selectedStudents.map((value) => String(value))
     );
     if (this.form.valid) {
-      this.asesor = {
-        correo: this.form.controls['correo'].value,
-        institucionLabora: this.form.controls['institucionLabora'].value,
-        telefono: this.form.controls['telefono'].value,
-        nombre: this.form.controls['nombre'].value,
-        nivelAcademico: this.form.controls['nivelAcademico'].value,
-      };
-      this.solicitudService
-        .editAsesor(this.asesor, this.solicitudes.asesor_id.id)
-        .subscribe((data) => {
-          this.solicitud = {
-            asesor_id: data.id,
-            carrera_id: this.form.controls['carrera_id'].value,
-            datosProyecto: this.form.controls['datosProyecto'].value,
-            linea_investigacion:
-              this.form.controls['linea_investigacion'].value,
-            tema_id: this.form.controls['tema_id'].value,
-            usuario_id: this.selectedStudents,
-          };
-          this.solicitudService
-            .editSolicitud(this.solicitud, this.solicitudes.id)
-            .subscribe((data) => {
-              console.log(data);
-            });
-        });
+      console.log(this.form.value);
+
+      // this.asesor = {
+      //   correo: this.form.controls['correo'].value,
+      //   institucionLabora: this.form.controls['institucionLabora'].value,
+      //   telefono: this.form.controls['telefono'].value,
+      //   nombre: this.form.controls['nombre'].value,
+      //   nivelAcademico: this.form.controls['nivelAcademico'].value,
+      // };
+      // this.solicitudService
+      //   .editAsesor(this.asesor, this.solicitudes.asesor_id.id)
+      //   .subscribe((data) => {
+      //     this.solicitud = {
+      //       asesor_id: data.id,
+      //       carrera_id: this.form.controls['carrera_id'].value,
+      //       datosProyecto: this.form.controls['datosProyecto'].value,
+      //       linea_investigacion:
+      //         this.form.controls['linea_investigacion'].value,
+      //       tema_id: this.form.controls['tema_id'].value,
+      //       usuario_id: this.selectedStudents,
+      //     };
+      //     this.solicitudService
+      //       .editSolicitud(this.solicitud, this.solicitudes.id)
+      //       .subscribe((data) => {
+      //         console.log(data);
+      //       });
+      //   });
     } else {
       this.validateAllFormFields(this.form);
     }

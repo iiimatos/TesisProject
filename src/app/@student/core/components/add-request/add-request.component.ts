@@ -51,7 +51,7 @@ export class AddRequestComponent implements OnInit {
     this.carreraService.getAllCarreras().subscribe((data) => {
       this.carreras = data;
     });
-    this.userService.getAllUsersNotAsignados().subscribe((data) => {
+    this.userService.getAllUsers().subscribe((data) => {
       this.listStudents = data;
     });
   }
