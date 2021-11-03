@@ -24,7 +24,7 @@ export class LoginComponent {
 
   private buildForm() {
     this.form = this.formBuilder.group({
-      identifier: ['', [Validators.required]],
+      identifier: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
@@ -34,24 +34,24 @@ export class LoginComponent {
     if (this.form.valid) {
       const identifier = this.form.controls['identifier'].value;
       const password = this.form.controls['password'].value;
-      this.authService.login(identifier, password).subscribe((data: any) => {
-        if (data.jwt && data.user !== null) {
-          basicAlert(TYPE_ALERT.SUCCESS, 'Sesion Iniciada');
-          this.authService.setSession(data.jwt);
-          // this.authService.updateSession({
-          //   status: true,
-          //   user: data.user,
-          // });
+      this.authService.login(identifier, password).subscribe(
+        (data: any) => {
+          if (data.jwt && data.user !== null) {
+            basicAlert(TYPE_ALERT.SUCCESS, 'Sesion Iniciada');
+            this.authService.setSession(data.jwt);
 
-          if (data.user.role.name === 'Student') {
-            this.router.navigate(['/student']);
-          } else {
-            this.router.navigate(['/teacher']);
+            if (data.user.role.name === 'Student') {
+              this.router.navigate(['/student']);
+            } else {
+              this.router.navigate(['/teacher']);
+            }
+            return;
           }
-          return;
+        },
+        (error) => {
+          console.log(error.error.data[0].messages[0].message);
         }
-        alert('Noo');
-      });
+      );
     }
   }
 }

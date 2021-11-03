@@ -48,8 +48,8 @@
       </div>
       <div class="mb-1">
         <label for="estudiante" class="form-label">Estudiantes </label>
-        <ng-select [(ngModel)]="selectedStudents" bindLabel="name" [ngModelOptions]="{standalone: true}"
-          placeholder="Selecciona los estudiantes" [multiple]="true" [maxSelectedItems]="3">
+        <ng-select formControlName="usuario_id" bindLabel="name" placeholder="Selecciona los estudiantes"
+          [multiple]="true" [maxSelectedItems]="3">
           <ng-option *ngFor="let student of listStudents" [value]="student.id">{{student.nombre}} {{student.apellido}} -
             {{student.username}}
           </ng-option>
@@ -98,6 +98,9 @@
           <div class="mt-2" *ngIf="form.get('correo').errors && form.get('correo').touched">
             <p class="alert alert-danger" role="alert" *ngIf="form.get('correo').hasError('required')">
               Este campo es requerido
+            </p>
+            <p class="alert alert-danger" role="alert" *ngIf="form.get('correo').hasError('email')">
+              No es un email valido, user@user.com
             </p>
           </div>
         </div>

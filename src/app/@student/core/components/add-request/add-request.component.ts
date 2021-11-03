@@ -104,9 +104,6 @@ export class AddRequestComponent implements OnInit {
 
   save(event: Event) {
     event.preventDefault();
-    this.form.controls.usuario_id.setValue(
-      this.selectedStudents.map((value) => String(value))
-    );
     if (this.form.valid) {
       this.asesor = {
         correo: this.form.controls['correo'].value,
@@ -122,7 +119,7 @@ export class AddRequestComponent implements OnInit {
           datosProyecto: this.form.controls['datosProyecto'].value,
           linea_investigacion: this.form.controls['linea_investigacion'].value,
           tema_id: this.form.controls['tema_id'].value,
-          usuario_id: this.selectedStudents,
+          usuario_id: this.form.controls['usuario_id'].value,
           estatus_id: { id: '1' },
         };
         this.solicitudService.createSolicitud(this.solicitud).subscribe((_) => {

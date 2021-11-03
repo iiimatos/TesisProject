@@ -29,7 +29,7 @@ export class AdminGuard implements CanActivateChild {
       this.id = id;
       this.role = name;
 
-      if (this.role === 'Teacher' || this.role === 'Coordinator') {
+      if (this.role === 'Coordinator') {
         return true;
       }
       return this.redirect();

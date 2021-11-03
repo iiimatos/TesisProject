@@ -34,7 +34,6 @@ export class EditRequestComponent implements OnInit {
   lineas: Array<ILineaInvestigacion> = [];
   select: boolean = true;
   listStudents: Array<IUser> = [];
-  selectedStudents: Array<{ id: string }> = [];
   form: FormGroup;
   asesor: IAsesor;
   solicitud: ISolitud;
@@ -61,9 +60,7 @@ export class EditRequestComponent implements OnInit {
       .getAllByIdAndUsers(this.solicitudId)
       .subscribe((data) => {
         this.solicitudes = data;
-        this.selectedStudents = data.usuario_id.map((usuario) => usuario.id);
-        console.log(this.selectedStudents);
-
+        let usersId = data.usuario_id.map((usuario) => usuario.id);
         this.form.patchValue({
           carrera_id: data.carrera_id.id,
           tema_id: data.tema_id.id,
@@ -74,6 +71,7 @@ export class EditRequestComponent implements OnInit {
           institucionLabora: data.asesor_id.institucionLabora,
           datosProyecto: data.datosProyecto,
           linea_investigacion: data.linea_investigacion.id,
+          usuario_id: usersId,
         });
         this.valueChange(data.carrera_id.id);
       });
@@ -127,9 +125,6 @@ export class EditRequestComponent implements OnInit {
 
   edit(event: Event) {
     event.preventDefault();
-    this.form.controls.usuario_id.setValue(
-      this.selectedStudents.map((value) => String(value))
-    );
     if (this.form.valid) {
       this.asesor = {
         correo: this.form.controls['correo'].value,
@@ -148,12 +143,12 @@ export class EditRequestComponent implements OnInit {
             linea_investigacion:
               this.form.controls['linea_investigacion'].value,
             tema_id: this.form.controls['tema_id'].value,
-            usuario_id: this.selectedStudents,
+            usuario_id: this.form.controls['usuario_id'].value,
           };
           this.solicitudService
             .editSolicitud(this.solicitud, this.solicitudes.id)
             .subscribe((data) => {
-              console.log(data);
+              window.location.reload();
             });
         });
     } else {
