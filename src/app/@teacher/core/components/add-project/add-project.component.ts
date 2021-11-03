@@ -1,3 +1,4 @@
+import { TopicRequestComponent } from './../../../../@student/pages/topic-request/topic-request.component';
 import { FileService } from './../../../../@core/services/file.service';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -23,12 +24,12 @@ export class AddProjectComponent implements OnInit {
       );
     }
     this.fileService.uploadFiles(formData).subscribe((data) => {
-      console.log(data);
+      this.modal.dismissAll();
+      location.reload();
     });
   }
 
   onFileChange(event) {
     this.uploadedFiles = event.target.files;
-    console.log(this.uploadedFiles);
   }
 }

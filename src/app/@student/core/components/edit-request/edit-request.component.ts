@@ -131,33 +131,31 @@ export class EditRequestComponent implements OnInit {
       this.selectedStudents.map((value) => String(value))
     );
     if (this.form.valid) {
-      console.log(this.form.value);
-
-      // this.asesor = {
-      //   correo: this.form.controls['correo'].value,
-      //   institucionLabora: this.form.controls['institucionLabora'].value,
-      //   telefono: this.form.controls['telefono'].value,
-      //   nombre: this.form.controls['nombre'].value,
-      //   nivelAcademico: this.form.controls['nivelAcademico'].value,
-      // };
-      // this.solicitudService
-      //   .editAsesor(this.asesor, this.solicitudes.asesor_id.id)
-      //   .subscribe((data) => {
-      //     this.solicitud = {
-      //       asesor_id: data.id,
-      //       carrera_id: this.form.controls['carrera_id'].value,
-      //       datosProyecto: this.form.controls['datosProyecto'].value,
-      //       linea_investigacion:
-      //         this.form.controls['linea_investigacion'].value,
-      //       tema_id: this.form.controls['tema_id'].value,
-      //       usuario_id: this.selectedStudents,
-      //     };
-      //     this.solicitudService
-      //       .editSolicitud(this.solicitud, this.solicitudes.id)
-      //       .subscribe((data) => {
-      //         console.log(data);
-      //       });
-      //   });
+      this.asesor = {
+        correo: this.form.controls['correo'].value,
+        institucionLabora: this.form.controls['institucionLabora'].value,
+        telefono: this.form.controls['telefono'].value,
+        nombre: this.form.controls['nombre'].value,
+        nivelAcademico: this.form.controls['nivelAcademico'].value,
+      };
+      this.solicitudService
+        .editAsesor(this.asesor, this.solicitudes.asesor_id.id)
+        .subscribe((data) => {
+          this.solicitud = {
+            asesor_id: data.id,
+            carrera_id: this.form.controls['carrera_id'].value,
+            datosProyecto: this.form.controls['datosProyecto'].value,
+            linea_investigacion:
+              this.form.controls['linea_investigacion'].value,
+            tema_id: this.form.controls['tema_id'].value,
+            usuario_id: this.selectedStudents,
+          };
+          this.solicitudService
+            .editSolicitud(this.solicitud, this.solicitudes.id)
+            .subscribe((data) => {
+              console.log(data);
+            });
+        });
     } else {
       this.validateAllFormFields(this.form);
     }

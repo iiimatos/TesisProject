@@ -1,1 +1,52 @@
-<p>topic-bank works!</p>
+<div class="container">
+  <div class="alert alert-dark" role="alert">
+    <h2 class="display-4 title">Proyectos</h2>
+  </div>
+  <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+    <li [ngbNavItem]="1">
+      <a ngbNavLink>Temas Pre-aprobados</a>
+      <ng-template ngbNavContent>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="2">
+      <a ngbNavLink>Proyectos en curso</a>
+      <ng-template ngbNavContent>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="3">
+      <a ngbNavLink>Proyecto Culminados</a>
+      <ng-template ngbNavContent>
+        <table class="table table-bordered mt-2">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Tema</th>
+              <th scope="col">Carrera</th>
+              <th scope="col">Estudiantes</th>
+              <th scope="col">Fecha</th>
+              <th scope="col">Estatus</th>
+              <th scope="col">Opciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let solicitud of solicitudesCuliminadas; index as i">
+              <th scope="row">{{i + 1}}</th>
+              <td>{{solicitud.tema_id.tema}}</td>
+              <td>{{solicitud.carrera_id.carrera}}</td>
+              <td>{{namesCulimandos[i]}}</td>
+              <td>{{solicitud.created_at | date:"dd/MM/yy"}}</td>
+              <td>{{solicitud.estatus_id.nombre}}</td>
+              <td>
+                <button class="btn btn-primary" (click)="viewModal(solicitud.id)">
+                  <i class="far fa-eye"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </ng-template>
+    </li>
+  </ul>
+
+  <div [ngbNavOutlet]="nav" class="p-2 bg"></div>
+</div>

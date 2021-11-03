@@ -1,0 +1,28 @@
+import { SolicitudService } from './../../../../@core/services/solicitud.service';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ISolitud } from './../../../../@core/models/carrera.interface';
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-view-request',
+  templateUrl: './view-request.component.html',
+  styleUrls: ['./view-request.component.scss'],
+})
+export class ViewRequestComponent implements OnInit {
+  solicitudId: number = 0;
+  solicitud: ISolitud | undefined;
+
+  constructor(
+    public modal: NgbActiveModal,
+    private solicitudService: SolicitudService
+  ) {}
+
+  ngOnInit(): void {
+    this.solicitudService
+      .getAllByIdAndUsers(this.solicitudId)
+      .subscribe((data) => {
+        this.solicitud = data;
+        console.log(this.solicitud);
+      });
+  }
+}
