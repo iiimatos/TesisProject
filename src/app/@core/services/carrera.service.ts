@@ -39,6 +39,15 @@ export class CarreraService {
     return this.http.get(direccion, { headers });
   }
 
+  getTemaById(id: number): Observable<any> {
+    let direccion = this.url + `/temas/${id}`;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getSession().jwt}`,
+    });
+    return this.http.get(direccion, { headers });
+  }
+
   createTema(tema: ITema): Observable<any> {
     let direccion = this.url + '/temas';
     const headers = new HttpHeaders({
@@ -46,6 +55,15 @@ export class CarreraService {
       Authorization: `Bearer ${getSession().jwt}`,
     });
     return this.http.post(direccion, { ...tema }, { headers });
+  }
+
+  editTema(tema: ITema, id: number): Observable<any> {
+    let direccion = this.url + `/temas/${id}`;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getSession().jwt}`,
+    });
+    return this.http.put(direccion, { ...tema }, { headers });
   }
 
   getLineaByIdCarrera(id: number): Observable<any> {
