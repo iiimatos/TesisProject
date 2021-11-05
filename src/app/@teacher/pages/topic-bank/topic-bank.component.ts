@@ -32,7 +32,6 @@ export class TopicBankComponent implements OnInit {
   getAllTemas() {
     this.carreraService.getAllTemasNoSeleccionado().subscribe((data) => {
       this.temas = data;
-      console.log(this.temas);
     });
   }
 
@@ -78,7 +77,14 @@ export class TopicBankComponent implements OnInit {
       confirmButtonText: 'Eliminar!!!',
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire('Eliminado!', 'Tema fue eliminar correctamente!.', 'success');
+        this.carreraService.deleteTemaById(id).subscribe((_) => {
+          Swal.fire(
+            'Eliminado!',
+            'Tema fue eliminar correctamente!.',
+            'success'
+          );
+          this.getAllTemas();
+        });
       }
     });
   }

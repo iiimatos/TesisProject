@@ -66,6 +66,15 @@ export class CarreraService {
     return this.http.put(direccion, { ...tema }, { headers });
   }
 
+  deleteTemaById(id: number): Observable<any> {
+    let direccion = this.url + `/temas/${id}`;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getSession().jwt}`,
+    });
+    return this.http.delete(direccion, { headers });
+  }
+
   getLineaByIdCarrera(id: number): Observable<any> {
     let direccion = this.url + `/linea-investigacions?carrera_id.id=${id}`;
     const headers = new HttpHeaders({
