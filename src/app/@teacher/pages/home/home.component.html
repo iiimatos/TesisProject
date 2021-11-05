@@ -29,10 +29,10 @@
         <td>Pediente de aprobacion</td>
         <td>{{item.carrera_id.codigoCarrera}}</td>
         <td>
-          <button class="btn btn-primary">
+          <button class="btn btn-primary" (click)="viewModal(item.id)">
             <i class="far fa-eye"></i>
           </button>
-          <button class="btn btn-success mx-3">
+          <button class="btn btn-success mx-3" (click)="acceptRequest(item.id)">
             <i class="fas fa-check"></i>
           </button>
           <button class="btn btn-danger">

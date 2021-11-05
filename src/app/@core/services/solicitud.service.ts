@@ -112,12 +112,21 @@ export class SolicitudService {
     return this.http.delete(direccion, { headers });
   }
   
-  getAll() : Observable<any>{
-    let direccion = this.url + '/solicitudes-temas';
+  getAllRequest() : Observable<any>{
+    let direccion = this.url + '/solicitudes-temas?status=false';
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${getSession().jwt}`,
     });
     return this.http.get(direccion, { headers });
+  }
+
+  acceptRequest(id: number):Observable<any>{
+    let direccion = this.url + `/solicitudes-temas/${id}`;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getSession().jwt}`,
+    });
+    return this.http.put(direccion, {status:true} ,{ headers });
   }
 }

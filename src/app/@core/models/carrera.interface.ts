@@ -55,6 +55,7 @@ export interface ISolitud {
   tema_id: ITema;
   datosProyecto: string;
   usuario_id: Array<IUser>;
+  status?: boolean;
   estatus_id?: IStatus;
   created_at?: Date;
   updated_at?: Date;
