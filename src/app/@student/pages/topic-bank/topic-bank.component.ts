@@ -1,3 +1,4 @@
+import { ViewTemaComponent } from './../../core/components/view-tema/view-tema.component';
 import { ViewRequestComponent } from './../../core/components/view-request/view-request.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {
@@ -66,6 +67,13 @@ export class TopicBankComponent implements OnInit {
         soli.usuario_id.map((usuario) => usuario.nombre).join(', ')
       );
     });
+  }
+
+  viewModalTema(id: number) {
+    const ref = this.modalService.open(ViewTemaComponent, {
+      size: 'lg',
+    });
+    ref.componentInstance.temaId = id;
   }
 
   //temas - preaprobados

@@ -36,34 +36,16 @@ export class TopicBankComponent implements OnInit {
   }
 
   viewModalTema(id: number) {
-    console.log(id);
     const ref = this.modalService.open(TemaViewComponent, {
       size: 'lg',
     });
     ref.componentInstance.temaId = id;
-    ref.result.then(
-      (yes) => {
-        console.log(yes);
-      },
-      (cancel) => {
-        console.log(cancel);
-      }
-    );
   }
   editModalTema(id: number) {
-    console.log(id);
     const ref = this.modalService.open(TemaEditComponent, {
       size: 'lg',
     });
     ref.componentInstance.temaId = id;
-    ref.result.then(
-      (yes) => {
-        console.log(yes);
-      },
-      (cancel) => {
-        console.log(cancel);
-      }
-    );
   }
 
   deleteTema(id: number) {

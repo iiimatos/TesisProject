@@ -25,7 +25,9 @@
                   {{tema.carrera_id.created_at | date:"dd/MM/yy"}}</span></p>
             </div>
             <div class="">
-              <button class="btn btn-success"><i class="fas fa-download"></i></button>
+              <button class="btn btn-primary" (click)="viewModalTema(tema.id)">
+                <i class="far fa-eye"></i>
+              </button>
             </div>
           </div>
         </div>

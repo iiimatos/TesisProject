@@ -35,7 +35,7 @@ export class TemaAddComponent implements OnInit {
       tema: ['', [Validators.required]],
       alcance: ['', [Validators.required]],
       carrera_id: ['', [Validators.required]],
-      linea_investigacion_id: ['', [Validators.required]],
+      linea_investigacion: ['', [Validators.required]],
       problematica: ['', [Validators.required]],
     });
   }

@@ -44,15 +44,14 @@
           </div>
         </div>
         <div class="col-6">
-          <label for="linea_investigacion_id" class="form-label">Linea de Investigacion</label>
-          <select class="form-select" formControlName="linea_investigacion_id" id="linea_investigacion_id"
-            name="linea_investigacion_id">
+          <label for="linea_investigacion" class="form-label">Linea de Investigacion</label>
+          <select class="form-select" formControlName="linea_investigacion" id="linea_investigacion"
+            name="linea_investigacion">
             <option value="" selected disabled hidden>Elige una linea de investigacion</option>
             <option *ngFor="let linea of lineas" value="{{linea.id}}">{{linea.linea}}</option>
           </select>
-          <div class="mt-2"
-            *ngIf="form.get('linea_investigacion_id').errors && form.get('linea_investigacion_id').touched">
-            <p class="alert alert-danger" role="alert" *ngIf="form.get('linea_investigacion_id').hasError('required')">
+          <div class="mt-2" *ngIf="form.get('linea_investigacion').errors && form.get('linea_investigacion').touched">
+            <p class="alert alert-danger" role="alert" *ngIf="form.get('linea_investigacion').hasError('required')">
               Este campo es requerido
             </p>
           </div>

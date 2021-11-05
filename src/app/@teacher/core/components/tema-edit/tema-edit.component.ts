@@ -25,7 +25,6 @@ export class TemaEditComponent implements OnInit {
   constructor(
     public modal: NgbActiveModal,
     private carreraService: CarreraService,
-    private authService: AuthService,
     private formBuilder: FormBuilder
   ) {
     this.buildForm();
@@ -35,22 +34,20 @@ export class TemaEditComponent implements OnInit {
       tema: ['', [Validators.required]],
       alcance: ['', [Validators.required]],
       carrera_id: ['', [Validators.required]],
-      linea_investigacion_id: ['', [Validators.required]],
+      linea_investigacion: ['', [Validators.required]],
       problematica: ['', [Validators.required]],
     });
   }
 
   ngOnInit(): void {
     this.getAllCarrera();
-
     this.carreraService.getTemaById(this.temaId).subscribe((data) => {
-      console.log(data);
-      this.getLinea(data.linea_investigacion_id.id);
+      this.getLinea(data.linea_investigacion.id);
       this.form.patchValue({
         tema: data.tema,
         alcance: data.alcance,
         carrera_id: data.carrera_id.id,
-        linea_investigacion_id: data.linea_investigacion_id.id,
+        linea_investigacion: data.linea_investigacion.id,
         problematica: data.problematica,
       });
     });

@@ -15,7 +15,7 @@ export interface ITema {
   problematica?: string;
   alcance?: string;
   seleccionado?: boolean;
-  profesor?: string;
+  profesor?: IUser;
   created_at?: Date;
   updated_at?: Date;
 }
