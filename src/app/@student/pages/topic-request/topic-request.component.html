@@ -22,18 +22,17 @@
         <td>{{solicitud.carrera_id.carrera}}</td>
         <td>{{names[i]}}</td>
         <td>{{solicitud.created_at | date:"dd/MM/yy"}}</td>
-        <td>Aprobado</td>
+        <td>{{solicitud.estatus_id.nombre}}</td>
         <td>
           <button class="btn btn-primary" (click)="viewModal(solicitud.id)">
             <i class="far fa-eye"></i>
           </button>
-          <button class="btn btn-dark ml-1" (click)="editModal(solicitud.id)">
+          <button *ngIf="solicitud.estatus_id.nombre === 'Pendiente de Aprobacion'" class="btn btn-dark mx-1"
+            (click)="editModal(solicitud.id)">
             <i class="fas fa-edit"></i>
           </button>
-          <button class="btn btn-success mx-1">
-            <i class="fas fa-download"></i>
-          </button>
-          <button (click)="delete(solicitud.id, solicitud.asesor_id.id)" class="btn btn-danger">
+          <button *ngIf="solicitud.estatus_id.nombre === 'Pendiente de Aprobacion'"
+            (click)="delete(solicitud.id, solicitud.asesor_id.id)" class="btn btn-danger">
             <i class="fas fa-trash-alt"></i>
           </button>
         </td>

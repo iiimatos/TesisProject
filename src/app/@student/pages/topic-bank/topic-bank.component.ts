@@ -36,7 +36,7 @@ export class TopicBankComponent implements OnInit {
   }
 
   getAllTemas() {
-    this.carreraService.getAllTemas().subscribe((data) => {
+    this.carreraService.getAllTemasNoSeleccionado().subscribe((data) => {
       this.temas = data;
     });
   }
@@ -44,7 +44,7 @@ export class TopicBankComponent implements OnInit {
   onChange(value: any) {
     if (value.target.value !== 'todos') {
       this.carreraService
-        .getTemaByIdCarrera(Number(value.target.value))
+        .getTemaByIdCarreraNoSeleccionado(Number(value.target.value))
         .subscribe((data) => {
           this.temas = data;
         });

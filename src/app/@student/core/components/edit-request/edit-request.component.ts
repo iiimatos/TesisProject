@@ -110,9 +110,11 @@ export class EditRequestComponent implements OnInit {
   }
 
   valueChange(value: number) {
-    this.carreraService.getTemaByIdCarrera(value).subscribe((data) => {
-      this.temas = data;
-    });
+    this.carreraService
+      .getTemaByIdCarreraNoSeleccionado(value)
+      .subscribe((data) => {
+        this.temas = data;
+      });
 
     this.carreraService.getLineaByIdCarrera(value).subscribe((data) => {
       this.lineas = data;

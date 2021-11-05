@@ -8,11 +8,16 @@ export interface ICarrera {
 }
 
 export interface ITema {
-  id: number;
-  carrera_id: ICarrera;
-  tema: string;
-  created_at: Date;
-  updated_at: Date;
+  id?: number;
+  carrera_id?: ICarrera;
+  tema?: string;
+  linea_investigacion?: ILineaInvestigacion;
+  problematica?: string;
+  alcance?: string;
+  seleccionado?: boolean;
+  profesor?: string;
+  created_at?: Date;
+  updated_at?: Date;
 }
 
 export interface IAsesor {

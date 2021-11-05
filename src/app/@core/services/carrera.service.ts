@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { ITema } from '../models/carrera.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -20,8 +21,8 @@ export class CarreraService {
     return this.http.get(direccion, { headers });
   }
 
-  getTemaByIdCarrera(id: number): Observable<any> {
-    let direccion = this.url + `/temas?carrera_id.id=${id}`;
+  getTemaByIdCarreraNoSeleccionado(id: number): Observable<any> {
+    let direccion = this.url + `/temas?carrera_id.id=${id}&seleccionado=false`;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${getSession().jwt}`,
@@ -29,13 +30,22 @@ export class CarreraService {
     return this.http.get(direccion, { headers });
   }
 
-  getAllTemas(): Observable<any> {
-    let direccion = this.url + '/temas';
+  getAllTemasNoSeleccionado(): Observable<any> {
+    let direccion = this.url + '/temas?seleccionado=false';
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${getSession().jwt}`,
     });
     return this.http.get(direccion, { headers });
+  }
+
+  createTema(tema: ITema): Observable<any> {
+    let direccion = this.url + '/temas';
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getSession().jwt}`,
+    });
+    return this.http.post(direccion, { ...tema }, { headers });
   }
 
   getLineaByIdCarrera(id: number): Observable<any> {

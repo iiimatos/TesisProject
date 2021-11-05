@@ -86,7 +86,7 @@ export class AddRequestComponent implements OnInit {
 
   onChange(value: any) {
     this.carreraService
-      .getTemaByIdCarrera(Number(value.target.value))
+      .getTemaByIdCarreraNoSeleccionado(Number(value.target.value))
       .subscribe((data) => {
         this.temas = data;
       });

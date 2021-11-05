@@ -17,15 +17,20 @@
             </select>
           </div>
         </div>
-        <div class="content border border-info p-2" *ngFor="let tema of temas">
-          <div>
-            <p>{{tema.tema}} - <i class="fas fas2 fa-file"></i> <span class="form-text">{{tema.carrera_id.carrera}}
-                -
-                {{tema.carrera_id.created_at | date:"dd/MM/yy"}}</span></p>
+        <div *ngIf="temas?.length != 0">
+          <div class="content border border-info p-2" *ngFor="let tema of temas">
+            <div>
+              <p>{{tema.tema}} - <i class="fas fas2 fa-file"></i> <span class="form-text">{{tema.carrera_id.carrera}}
+                  -
+                  {{tema.carrera_id.created_at | date:"dd/MM/yy"}}</span></p>
+            </div>
+            <div class="">
+              <button class="btn btn-success"><i class="fas fa-download"></i></button>
+            </div>
           </div>
-          <div class="">
-            <button class="btn btn-success"><i class="fas fa-download"></i></button>
-          </div>
+        </div>
+        <div class="alert alert-danger text-center" role="alert" *ngIf="temas?.length === 0">
+          No hay temas disponible.
         </div>
       </ng-template>
     </li>

@@ -1,0 +1,79 @@
+<ng-template #contenido let-modal>
+  <div class="modal-header">
+    <h4>Agregar Tema</h4>
+    <button class="btn btn-danger" aria-label="close" type="button" (click)="modal.dismiss()"><i
+        class="fas fa-times"></i></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="form" (ngSubmit)="save($event)">
+      <div class="row">
+        <div class="col-6">
+          <label for="tema" class="form-label">Nombre del tema</label>
+          <input type="text" class="form-control" name="tema" formControlName="tema" id="tema"
+            placeholder="Nombre del tema" />
+          <div class="mt-2" *ngIf="form.get('tema').errors && form.get('tema').touched">
+            <p class="alert alert-danger" role="alert" *ngIf="form.get('tema').hasError('required')">
+              Este campo es requerido
+            </p>
+          </div>
+        </div>
+        <div class="col-6">
+          <label for="alcance" class="form-label">Alcance del tema</label>
+          <input type="text" class="form-control" formControlName="alcance" name="alcance" id="alcance"
+            placeholder="Alcance del tema" />
+          <div class="mt-2" *ngIf="form.get('alcance').errors && form.get('alcance').touched">
+            <p class="alert alert-danger" role="alert" *ngIf="form.get('alcance').hasError('required')">
+              Este campo es requerido
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="row my-2">
+        <div class="col-6">
+          <label for="carrera_id" class="form-label">Carrera</label>
+          <select class="form-select" id="carrera_id" formControlName="carrera_id" (change)="onChange($event)"
+            name="carrera_id">
+            <option value="" selected disabled hidden>Seleccione su carrera</option>
+            <option *ngFor="let carrera of carreras" value="{{carrera.id}}">
+              {{carrera.carrera}}</option>
+          </select>
+          <div class="mt-2" *ngIf="form.get('carrera_id').errors && form.get('carrera_id').touched">
+            <p class="alert alert-danger" role="alert" *ngIf="form.get('carrera_id').hasError('required')">
+              Este campo es requerido
+            </p>
+          </div>
+        </div>
+        <div class="col-6">
+          <label for="linea_investigacion_id" class="form-label">Linea de Investigacion</label>
+          <select class="form-select" formControlName="linea_investigacion_id" id="linea_investigacion_id"
+            name="linea_investigacion_id">
+            <option value="" selected disabled hidden>Elige una linea de investigacion</option>
+            <option *ngFor="let linea of lineas" value="{{linea.id}}">{{linea.linea}}</option>
+          </select>
+          <div class="mt-2"
+            *ngIf="form.get('linea_investigacion_id').errors && form.get('linea_investigacion_id').touched">
+            <p class="alert alert-danger" role="alert" *ngIf="form.get('linea_investigacion_id').hasError('required')">
+              Este campo es requerido
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="problematica" class="form-label">Problematica del tema</label>
+        <textarea class="form-control" formControlName="problematica" id="problematica" name="problematica"
+          rows="3"></textarea>
+        <div class="mt-2" *ngIf="form.get('problematica').errors && form.get('problematica').touched">
+          <p class="alert alert-danger" role="alert" *ngIf="form.get('problematica').hasError('required')">
+            Este campo es requerido
+          </p>
+        </div>
+      </div>
+      <div class="d-grid gap-2 col-6 mx-auto">
+        <button class="btn btn-success" type="submit">Guardar<i class="fas fa-save"></i></button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<button class="btn btn-primary" (click)="modal.open(contenido, { size: 'lg' })">Agregar tema <i
+    class="fas fa-plus"></i></button>
