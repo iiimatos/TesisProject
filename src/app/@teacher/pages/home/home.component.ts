@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { SolicitudService } from 'src/app/@core/services/solicitud.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  public requests:Array<any>=[];
+  constructor(private solicitudService:SolicitudService, private router: Router) { }
+
 
   ngOnInit(): void {
+    this.solicitudService.getAll().subscribe(data=>{
+      this.requests = data;
+      console.log(this.requests)
+    })
   }
 
 }
