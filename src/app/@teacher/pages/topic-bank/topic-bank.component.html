@@ -72,14 +72,11 @@
                 <td>{{project.estatus_id.nombre}}</td>
                 <td>{{project.carrera_id.codigoCarrera}}</td>
                 <td>
-                  <button class="btn btn-primary">
+                  <button (click)="viewModal(project.id)" class="btn btn-primary">
                     <i class="far fa-eye"></i>
                   </button>
-                  <button class="btn btn-success mx-3">
-                    <i class="fas fa-check"></i>
-                  </button>
-                  <button class="btn btn-danger">
-                    <i class="fas fa-trash-alt"></i>
+                  <button (click)="editarProyecto(project.id)" class="btn btn-success mx-3">
+                    <i class="fas fa-edit"></i>
                   </button>
                 </td>
               </tr>

@@ -21,7 +21,7 @@ export class SolicitudService {
     return this.http.get(direccion, { headers });
   }
 
-  getAllByIdAndUsers(solicitudId: number): Observable<any> {
+  getAllByIdAndUsers(solicitudId: any): Observable<any> {
     let direccion = this.url + `/solicitudes-temas/${solicitudId}`;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',

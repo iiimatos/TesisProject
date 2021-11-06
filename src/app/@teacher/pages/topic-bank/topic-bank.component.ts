@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 import { ViewRequestComponent } from '../../core/components/view-request/view-request.component';
 import { TemaEditComponent } from '../../core/components/tema-edit/tema-edit.component';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-topic-bank',
@@ -19,6 +20,7 @@ export class TopicBankComponent implements OnInit {
   constructor(
     private solicitudService: SolicitudService,
     private modalService: NgbModal,
+    private router:Router,
     private carreraService: CarreraService
   ) {}
 
@@ -39,7 +41,6 @@ export class TopicBankComponent implements OnInit {
   getAllOnProject(){
     this.solicitudService.getAllOnProject().subscribe(data=>{
       this.projects = data;
-      console.log(this.projects)
     })
   }
 
@@ -109,4 +110,9 @@ export class TopicBankComponent implements OnInit {
       }
     );
   }
+
+  editarProyecto(id:number){
+    this.router.navigate(['teacher/topicbank/project-edit/', id])
+  }
+
 }

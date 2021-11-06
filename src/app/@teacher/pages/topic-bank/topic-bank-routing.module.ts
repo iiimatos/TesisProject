@@ -7,6 +7,8 @@ const routes: Routes = [
     path: '',
     component: TopicBankComponent,
   },
+  { path: 'project-edit/:id',
+   loadChildren: () => import('../../core/components/project-edit/project-edit.module').then(m => m.ProjectEditModule) },
 ];
 
 @NgModule({
