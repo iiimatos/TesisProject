@@ -121,6 +121,15 @@ export class SolicitudService {
     return this.http.get(direccion, { headers });
   }
 
+  getAllOnProject() : Observable<any>{
+    let direccion = this.url + '/solicitudes-temas?status=true';
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getSession().jwt}`,
+    });
+    return this.http.get(direccion, { headers });
+  }
+
   acceptRequest(id: number):Observable<any>{
     let direccion = this.url + `/solicitudes-temas/${id}`;
     const headers = new HttpHeaders({

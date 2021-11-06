@@ -15,7 +15,7 @@ import Swal from 'sweetalert2';
 })
 export class TopicBankComponent implements OnInit {
   active = 1;
-
+  public projects:Array<any>=[];
   constructor(
     private solicitudService: SolicitudService,
     private modalService: NgbModal,
@@ -25,6 +25,7 @@ export class TopicBankComponent implements OnInit {
   ngOnInit(): void {
     this.getAllProyectosCulminados();
     this.getAllTemas();
+    this.getAllOnProject();
   }
 
   //tema pre-aprobados
@@ -33,6 +34,13 @@ export class TopicBankComponent implements OnInit {
     this.carreraService.getAllTemasNoSeleccionado().subscribe((data) => {
       this.temas = data;
     });
+  }
+
+  getAllOnProject(){
+    this.solicitudService.getAllOnProject().subscribe(data=>{
+      this.projects = data;
+      console.log(this.projects)
+    })
   }
 
   viewModalTema(id: number) {
@@ -84,6 +92,7 @@ export class TopicBankComponent implements OnInit {
       );
     });
   }
+
 
   viewModal(id: number) {
     // console.log(id);
