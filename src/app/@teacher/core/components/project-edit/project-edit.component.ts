@@ -1,5 +1,10 @@
+import { ArrayType, ConstantPool } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ICarrera, ISolitud } from 'src/app/@core/models/carrera.interface';
+import { IUser } from 'src/app/@core/models/user.interface';
+import { CarreraService } from 'src/app/@core/services/carrera.service';
 import { SolicitudService } from 'src/app/@core/services/solicitud.service';
 
 @Component({
@@ -9,37 +14,104 @@ import { SolicitudService } from 'src/app/@core/services/solicitud.service';
 })
 export class ProjectEditComponent implements OnInit {
 
-  
-
+  public users: any = [];
+  public temas: any;
+  public solicitudes:ISolitud|undefined
+  public historial: Array<any> =[];
+  public linea:any;
+  public asesor:any;
+  public estado:any;
+  form: FormGroup;
   constructor(
     private solicitudService:SolicitudService,
     private activateRoute:ActivatedRoute,
-    private router:Router
-    ) { }
+    private router:Router,
+    private formBuilder: FormBuilder,
+    private carreraService:CarreraService
+    ) {
+      this.buildForm()
+    }
 
   ngOnInit(): void {
     let projectId = this.activateRoute.snapshot.paramMap.get('id');
     this.solicitudService.getAllByIdAndUsers(projectId).subscribe((data)=>{
-      console.log(data);
+      let carreraId= data.carrera_id.id;
+      this.carreraService.getTemaByIdCarreraNoSeleccionado(carreraId).subscribe((data)=>{
+        this.temas = data;
+      });
+      this.carreraService.getLineaByIdCarrera(carreraId).subscribe((data)=>{
+        this.linea = data;
+      });
+      this.users=data.usuario_id;
+      this.solicitudes= data;
+      let usersId = data.usuario_id.map((usuario)=> usuario.id);
+      this.form.patchValue({
+        asesor_id: data.asesor_id.id,
+        carrera_id: data.carrera_id.id,
+        linea_investigacion: data.linea_investigacion.id,
+        tema_id: data.tema_id.id,
+        datosProyecto: data.datosProyecto,
+        estatus_id: data.estatus_id.id, 
+        usuario_id: usersId
+      })
+
+    });
+
+    this.carreraService.getMyHistorialRequest(projectId).subscribe((data)=>{
+      this.historial=data;
     })
-    // this.userService.getUserById(userid).subscribe((data) => {
-    //   this.datosUsuarios = data;
-    //   this.editarForm.setValue({
-    //     id: userid,
-    //     nombre: this.datosUsuarios.nombre,
-    //     apellido: this.datosUsuarios.apellido,
-    //     username: this.datosUsuarios.username,
-    //     email: this.datosUsuarios.email,
-    //     role: this.datosUsuarios.role.id,
-    //     carrera: this.datosUsuarios.carrera_id.id,
-    //   });
-    // });
+
+    this.solicitudService.getAllAsesors().subscribe((data)=>{
+      this.asesor= data;
+    })
+
+    this.solicitudService.getAllStatus().subscribe((data)=>{
+      this.estado = data;
+    })
+
   }
 
   goToBackList(){
     this.router.navigate(['teacher/topicbank/'])
   }
-  getDataForm(){
+  private buildForm() {
+    this.form = this.formBuilder.group({
+      carrera_id: ['', [Validators.required]],
+      tema_id: ['', [Validators.required]],
+      usuario_id: [[]],
+      asesor_id: ['', [Validators.required]],
+      estatus_id: ['', [Validators.required]],
+      nivelAcademico: ['', [Validators.required]],
+      correo: ['', [Validators.required, Validators.email]],
+      institucionLabora: ['', [Validators.required]],
+      datosProyecto: ['', [Validators.required, Validators.maxLength(200)]],
+      linea_investigacion: ['', [Validators.required]],
+    });
+  }
 
+  edit(event:Event){
+    event.preventDefault();
+    let projectId = this.activateRoute.snapshot.paramMap.get('id');
+    this.temas = {
+      tema_id: this.form.controls['tema_id'].value
+    }
+    this.users =[
+      {usuario_id: this.form.controls['usuario_id'].value}
+    ]
+    this.linea={
+      linea_investigacion: this.form.controls['linea_investigacion'].value
+    }
+    this.solicitudService.editLineRequest(projectId, this.linea).subscribe((data)=>{
+      this.refresh();
+    })
+    this.solicitudService.editTopicRequest(projectId, this.temas).subscribe((data)=>{
+      this.refresh();
+    })
+    
+    console.log(this.users);  
+  }
+
+  refresh(): void {
+    window.location.reload();
   }
 }

@@ -111,6 +111,15 @@ export class SolicitudService {
     });
     return this.http.delete(direccion, { headers });
   }
+
+  getAllAsesors(): Observable<any>{
+    let direccion = this.url + '/asesors';
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getSession().jwt}`,
+    });
+    return this.http.get(direccion, { headers });
+  }
   
   getAllRequest() : Observable<any>{
     let direccion = this.url + '/solicitudes-temas?status=false';
@@ -128,6 +137,32 @@ export class SolicitudService {
       Authorization: `Bearer ${getSession().jwt}`,
     });
     return this.http.get(direccion, { headers });
+  }
+
+  getAllStatus():Observable<any>{
+    let direccion = this.url + '/estatuses';
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getSession().jwt}`,
+    });
+    return this.http.get(direccion, { headers });
+  }
+
+  editTopicRequest(id: any, temaId: any):Observable<any>{
+    let direccion = this.url + `/solicitudes-temas/${id}`;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getSession().jwt}`,
+    });
+    return this.http.put(direccion, temaId ,{ headers });
+  }
+  editLineRequest(id: any, lineaId: any):Observable<any>{
+    let direccion = this.url + `/solicitudes-temas/${id}`;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getSession().jwt}`,
+    });
+    return this.http.put(direccion, lineaId ,{ headers });
   }
 
   acceptRequest(id: number):Observable<any>{

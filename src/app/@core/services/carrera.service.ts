@@ -102,4 +102,23 @@ export class CarreraService {
     });
     return this.http.get(direccion, { headers });
   }
+
+  getMyHistorialRequest(userId: string): Observable<any> {
+    let direccion =
+      this.url + `/historials?solicitudes_tema.id=${userId}`;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getSession().jwt}`,
+    });
+    return this.http.get(direccion, { headers });
+  }
+
+  getAllTemaByCarrera(id: number){
+    let direccion = this.url + `/temas?carrera_id.id=${id}`;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getSession().jwt}`,
+    });
+    return this.http.get(direccion, { headers });
+  }
 }

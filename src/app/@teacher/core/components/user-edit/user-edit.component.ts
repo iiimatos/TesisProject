@@ -27,7 +27,7 @@ export class UserEditComponent implements OnInit {
     private router: Router,
     private activateRoute: ActivatedRoute,
     private userService: UserService,
-    private carreraServices: CarreraService
+
   ) {}
 
   ngOnInit(): void {
