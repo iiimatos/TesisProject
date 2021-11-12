@@ -1,0 +1,27 @@
+<div class="modal-header">
+    <h4>Editar Usuarios</h4>
+    <button class="btn btn-danger" aria-label="close" type="button" (click)="modal.dismiss()"><i
+        class="fas fa-times"></i></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="form" >
+      <h6 class="lead">Datos Sobre el/los Estudiantes</h6>
+      <hr />
+      <div class="mb-1">
+        <label for="estudiante" class="form-label">Estudiantes </label>
+        <ng-select formControlName="usuario_id" bindLabel="name" placeholder="Selecciona los estudiantes"
+          [multiple]="true" [maxSelectedItems]="3">
+          <ng-option *ngFor="let student of listStudents" [value]="student.id">{{student.nombre}} {{student.apellido}} -
+            {{student.username}}
+          </ng-option>
+        </ng-select>
+        <div class="form-text mt-1 text-right">(Max 3)</div>
+      </div>
+      
+      <div class="d-grid gap-2 col-6 mx-auto">
+        <button class="btn btn-success" type="submit">Actualizar <i class="fas fa-pen"></i></button>
+        <button class="btn btn-danger" aria-label="close" type="button" (click)="modal.dismiss()">Cancelar <i
+            class="fas fa-times"></i></button>
+      </div>
+    </form>
+  </div>

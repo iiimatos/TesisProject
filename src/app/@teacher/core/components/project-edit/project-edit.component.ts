@@ -2,10 +2,12 @@ import { ArrayType, ConstantPool } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ICarrera, ISolitud } from 'src/app/@core/models/carrera.interface';
 import { IUser } from 'src/app/@core/models/user.interface';
 import { CarreraService } from 'src/app/@core/services/carrera.service';
 import { SolicitudService } from 'src/app/@core/services/solicitud.service';
+import { EditProjectUserComponent } from '../edit-project-user/edit-project-user.component';
 
 @Component({
   selector: 'app-project-edit',
@@ -27,7 +29,8 @@ export class ProjectEditComponent implements OnInit {
     private activateRoute:ActivatedRoute,
     private router:Router,
     private formBuilder: FormBuilder,
-    private carreraService:CarreraService
+    private carreraService:CarreraService,
+    private modalService: NgbModal
     ) {
       this.buildForm()
     }
@@ -87,6 +90,14 @@ export class ProjectEditComponent implements OnInit {
       datosProyecto: ['', [Validators.required, Validators.maxLength(200)]],
       linea_investigacion: ['', [Validators.required]],
     });
+  }
+
+  editAddModel(){
+    const modal = this.modalService.open(EditProjectUserComponent,{
+      size: 'lg',
+    });
+    let projectId = this.activateRoute.snapshot.paramMap.get('id');
+    modal.componentInstance.solicitudId = projectId;
   }
 
   edit(event:Event){

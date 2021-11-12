@@ -9,6 +9,8 @@ import { ViewRequestComponent } from '../../core/components/view-request/view-re
 import { TemaAddComponent } from '../../core/components/tema-add/tema-add.component';
 import { TemaEditComponent } from '../../core/components/tema-edit/tema-edit.component';
 import { TemaViewComponent } from '../../core/components/tema-view/tema-view.component';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { EditProjectUserComponent } from '../../core/components/edit-project-user/edit-project-user.component';
 
 @NgModule({
   declarations: [
@@ -17,12 +19,14 @@ import { TemaViewComponent } from '../../core/components/tema-view/tema-view.com
     TemaAddComponent,
     TemaEditComponent,
     TemaViewComponent,
+    EditProjectUserComponent,
   ],
   imports: [
     CommonModule,
     TopicBankRoutingModule,
     ReactiveFormsModule,
     NgbModule,
+    NgSelectModule,
   ],
 })
 export class TopicBankModule {}

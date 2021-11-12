@@ -42,8 +42,8 @@
             </table>
         </div>
         <div class="col-md-1">
-            <button class="btn btn-dark" >
-                <i class="fas fa-edit"></i>
+            <button (click)="editAddModel()" class="btn btn-dark" >
+                <i class="fas fa-plus"></i>
             </button>
         </div>
         <div class="col-md-4 border border-light">
@@ -88,7 +88,7 @@
         </div>
         <div class="col-md-1">
             <button class="btn btn-dark" >
-                <i class="fas fa-edit"></i>
+                <i class="fas fa-plus"></i>
             </button>
         </div>
     </div>
@@ -113,4 +113,9 @@
 </form>
 <div class="mt-3 col-md-10 offset-md-1">
     <button type="button" class="btn btn-secondary mt-2" (click)="goToBackList();">Ir a la lista</button>
+</div>   
+<div class="col-md-1">
+  <button (click)="editAddModel()" class="btn btn-dark" >
+      <i class="fas fa-plus"></i>
+  </button>
 </div>
