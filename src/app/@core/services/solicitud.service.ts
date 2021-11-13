@@ -131,7 +131,7 @@ export class SolicitudService {
   }
 
   getAllOnProject() : Observable<any>{
-    let direccion = this.url + '/solicitudes-temas?status=true';
+    let direccion = this.url + '/solicitudes-temas?status=true&estatus_id.id_ne=6';
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${getSession().jwt}`,
@@ -163,6 +163,33 @@ export class SolicitudService {
       Authorization: `Bearer ${getSession().jwt}`,
     });
     return this.http.put(direccion, lineaId ,{ headers });
+  }
+
+  editUsersRequest(id: any, usersId: any):Observable<any>{
+    let direccion = this.url + `/solicitudes-temas/${id}`;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getSession().jwt}`,
+    });
+    return this.http.put(direccion, usersId ,{ headers });
+  }
+
+  addObsRequest(obs: any):Observable<any>{
+    let direccion = this.url + `/historials`;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getSession().jwt}`,
+    });
+    return this.http.post(direccion, obs ,{ headers });
+  }
+
+  editStatusRequest(id: any, statusId: any):Observable<any>{
+    let direccion = this.url + `/solicitudes-temas/${id}`;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getSession().jwt}`,
+    });
+    return this.http.put(direccion, statusId ,{ headers });
   }
 
   acceptRequest(id: number):Observable<any>{

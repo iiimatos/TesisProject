@@ -11,6 +11,7 @@ import { TemaEditComponent } from '../../core/components/tema-edit/tema-edit.com
 import { TemaViewComponent } from '../../core/components/tema-view/tema-view.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { EditProjectUserComponent } from '../../core/components/edit-project-user/edit-project-user.component';
+import { EditProjectObsComponent } from '../../core/components/edit-project-obs/edit-project-obs.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { EditProjectUserComponent } from '../../core/components/edit-project-use
     TemaEditComponent,
     TemaViewComponent,
     EditProjectUserComponent,
+    EditProjectObsComponent,
   ],
   imports: [
     CommonModule,

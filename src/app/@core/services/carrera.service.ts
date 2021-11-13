@@ -103,7 +103,7 @@ export class CarreraService {
     return this.http.get(direccion, { headers });
   }
 
-  getMyHistorialRequest(userId: string): Observable<any> {
+  getMyHistorialRequest(userId: any): Observable<any> {
     let direccion =
       this.url + `/historials?solicitudes_tema.id=${userId}`;
     const headers = new HttpHeaders({

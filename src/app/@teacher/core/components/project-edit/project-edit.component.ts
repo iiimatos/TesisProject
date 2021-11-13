@@ -7,6 +7,7 @@ import { ICarrera, ISolitud } from 'src/app/@core/models/carrera.interface';
 import { IUser } from 'src/app/@core/models/user.interface';
 import { CarreraService } from 'src/app/@core/services/carrera.service';
 import { SolicitudService } from 'src/app/@core/services/solicitud.service';
+import { EditProjectObsComponent } from '../edit-project-obs/edit-project-obs.component';
 import { EditProjectUserComponent } from '../edit-project-user/edit-project-user.component';
 
 @Component({
@@ -92,8 +93,18 @@ export class ProjectEditComponent implements OnInit {
     });
   }
 
-  editAddModel(){
+  editUserModal(event:Event){
+    event.preventDefault();
     const modal = this.modalService.open(EditProjectUserComponent,{
+      size: 'lg',
+    });
+    let projectId = this.activateRoute.snapshot.paramMap.get('id');
+    modal.componentInstance.solicitudId = projectId;
+  }
+
+  editObsModal(event:Event){
+    event.preventDefault();
+    const modal = this.modalService.open(EditProjectObsComponent,{
       size: 'lg',
     });
     let projectId = this.activateRoute.snapshot.paramMap.get('id');
@@ -106,9 +117,6 @@ export class ProjectEditComponent implements OnInit {
     this.temas = {
       tema_id: this.form.controls['tema_id'].value
     }
-    this.users =[
-      {usuario_id: this.form.controls['usuario_id'].value}
-    ]
     this.linea={
       linea_investigacion: this.form.controls['linea_investigacion'].value
     }
@@ -119,7 +127,7 @@ export class ProjectEditComponent implements OnInit {
       this.refresh();
     })
     
-    console.log(this.users);  
+   
   }
 
   refresh(): void {

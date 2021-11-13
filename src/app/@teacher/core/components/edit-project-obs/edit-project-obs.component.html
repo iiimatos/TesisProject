@@ -1,0 +1,41 @@
+<div class="modal-header">
+    <h4>Editar observación y estado </h4>
+    <button class="btn btn-danger" aria-label="close" type="button" (click)="modal.dismiss()"><i
+        class="fas fa-times"></i></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="form" (ngSubmit)="edit($event)">
+      
+      <h6 class="lead mt-4">Observacion</h6>
+      <hr />
+      <div class="mb-1">
+        <label for="observacion" class="form-label">Observacion del proyecto</label>
+        <textarea class="form-control" formControlName="observacion" name="observacion" id="observacion"
+          rows="3"></textarea>
+        <div class="mt-2" *ngIf="form.get('observacion').errors && form.get('observacion').touched">
+          <p class="alert alert-danger" role="alert" *ngIf="form.get('observacion').hasError('required')">
+            Este campo es requerido
+          </p>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="estatus" class="form-label">Estado del proyecto</label>
+        <select class="form-select" formControlName="estatus" id="estatus"
+          name="estatus">
+          <option value="" selected disabled hidden>Elige un estado</option>
+          <option *ngFor="let estado of estados" value="{{estado.id}}">{{estado.nombre}}</option>
+        </select>
+        <div class="mt-2" *ngIf="form.get('estatus').errors && form.get('estatus').touched">
+          <p class="alert alert-danger" role="alert" *ngIf="form.get('estatus').hasError('required')">
+            Este campo es requerido
+          </p>
+        </div>
+      </div>
+      <div class="d-grid gap-2 col-6 mx-auto">
+        <!-- [disabled]="form.invalid" -->
+        <button class="btn btn-success" type="submit">Actualizar <i class="fas fa-pen"></i></button>
+        <button class="btn btn-danger" aria-label="close" type="button" (click)="modal.dismiss()">Cancelar <i
+            class="fas fa-times"></i></button>
+      </div>
+    </form>
+  </div>

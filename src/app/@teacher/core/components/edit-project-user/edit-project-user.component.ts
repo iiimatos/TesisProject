@@ -11,14 +11,14 @@ import { UserService } from 'src/app/@core/services/user.service';
   styleUrls: ['./edit-project-user.component.scss']
 })
 export class EditProjectUserComponent implements OnInit {
-  solicitudId: number = 0;
-  listStudents: Array<any> = [];
-  form :FormGroup;
+  public solicitudId: number = 0;
+  public listStudents: Array<any> = [];
+  public form :FormGroup;
+  public users: any = [];
   constructor(
     private userService: UserService,
     public modal: NgbActiveModal,
     private solicitudService: SolicitudService,
-    private carreraService: CarreraService,
     private formBuilder: FormBuilder
   ) { 
     this.buildForm();
@@ -40,6 +40,20 @@ export class EditProjectUserComponent implements OnInit {
     this.form = this.formBuilder.group({
       usuario_id:[[]]
     })
+  }
+
+  edit(event:Event){
+    event.preventDefault();
+    this.users = {usuario_id: this.form.controls['usuario_id'].value}
+    
+    this.solicitudService.editUsersRequest(this.solicitudId, this.users).subscribe((data)=>{
+      this.refresh();
+    })
+
+  }
+  
+  refresh(): void {
+    window.location.reload();
   }
 
 }

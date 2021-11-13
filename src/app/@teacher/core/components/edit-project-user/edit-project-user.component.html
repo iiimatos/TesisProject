@@ -4,9 +4,7 @@
         class="fas fa-times"></i></button>
   </div>
   <div class="modal-body">
-    <form [formGroup]="form" >
-      <h6 class="lead">Datos Sobre el/los Estudiantes</h6>
-      <hr />
+    <form [formGroup]="form" (ngSubmit)="edit($event)" >
       <div class="mb-1">
         <label for="estudiante" class="form-label">Estudiantes </label>
         <ng-select formControlName="usuario_id" bindLabel="name" placeholder="Selecciona los estudiantes"
