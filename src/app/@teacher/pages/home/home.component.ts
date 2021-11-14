@@ -11,6 +11,7 @@ import { ViewRequestHomeComponent } from '../../core/components/view-request-hom
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
+
 export class HomeComponent implements OnInit {
   public solicitudes:ISolitud;
   public requests:Array<any>=[];
@@ -20,15 +21,11 @@ export class HomeComponent implements OnInit {
     private modalService: NgbModal
   ) { }
 
-
   ngOnInit(): void {
-    this.solicitudService.getAllRequest().subscribe(data=>{
+    this.solicitudService.getAllRequestHome().subscribe(data=>{
       this.requests = data;
-      console.log(this.requests)
     })
-    
   }
-
 
   viewModal(id: number) {
     // console.log(id);
@@ -40,10 +37,17 @@ export class HomeComponent implements OnInit {
 
   acceptRequest(id: number){
     this.solicitudService.acceptRequest(id).subscribe(data=>{
-      console.log(data);
+      this.refresh();
     })
-    
   }
- 
+  cancelRequest(id: number){
+    this.solicitudService.cancelRequest(id).subscribe(data=>{
+      this.refresh();
+    })
+  }
+  
+  refresh(): void {
+    window.location.reload();
+  }
 
 }

@@ -115,19 +115,15 @@ export class ProjectEditComponent implements OnInit {
     event.preventDefault();
     let projectId = this.activateRoute.snapshot.paramMap.get('id');
     this.temas = {
-      tema_id: this.form.controls['tema_id'].value
+      tema_id: this.form.controls['tema_id'].value,
+      linea_investigacion: this.form.controls['linea_investigacion'].value,
+      asesor_id: this.form.controls['asesor_id'].value
     }
-    this.linea={
-      linea_investigacion: this.form.controls['linea_investigacion'].value
-    }
-    this.solicitudService.editLineRequest(projectId, this.linea).subscribe((data)=>{
-      this.refresh();
-    })
+
     this.solicitudService.editTopicRequest(projectId, this.temas).subscribe((data)=>{
       this.refresh();
     })
-    
-   
+
   }
 
   refresh(): void {

@@ -35,8 +35,8 @@
           <button class="btn btn-success mx-3" (click)="acceptRequest(item.id)">
             <i class="fas fa-check"></i>
           </button>
-          <button class="btn btn-danger">
-            <i class="fas fa-trash-alt"></i>
+          <button class="btn btn-danger" (click)="cancelRequest(item.id)">
+            <i class="fas fa-times"></i>
           </button>
         </td>
       </tr>

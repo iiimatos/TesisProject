@@ -130,6 +130,15 @@ export class SolicitudService {
     return this.http.get(direccion, { headers });
   }
 
+  getAllRequestHome() : Observable<any>{
+    let direccion = this.url + '/solicitudes-temas?status=false&estatus_id.id_ne=7';
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getSession().jwt}`,
+    });
+    return this.http.get(direccion, { headers });
+  }
+
   getAllOnProject() : Observable<any>{
     let direccion = this.url + '/solicitudes-temas?status=true&estatus_id.id_ne=6';
     const headers = new HttpHeaders({
@@ -199,5 +208,13 @@ export class SolicitudService {
       Authorization: `Bearer ${getSession().jwt}`,
     });
     return this.http.put(direccion, {status:true} ,{ headers });
+  }
+  cancelRequest(id: number):Observable<any>{
+    let direccion = this.url + `/solicitudes-temas/${id}`;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getSession().jwt}`,
+    });
+    return this.http.put(direccion, {estatus_id:7} ,{ headers });
   }
 }

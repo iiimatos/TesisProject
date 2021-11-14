@@ -18,20 +18,18 @@ export class EditProjectObsComponent implements OnInit {
   public status : any;
   public historial: any;
   form: FormGroup;
+  
   constructor(
-    private userService: UserService,
     public modal: NgbActiveModal,
     private solicitudService: SolicitudService,
-    private carreraService: CarreraService,
     private formBuilder: FormBuilder) {
-      this.buildForm()
-     }
+      this.buildForm();
+    }
 
   ngOnInit(): void {
     this.solicitudService.getAllStatus().subscribe((data)=>{
       this.estados = data;
-    })
-
+    });
   }
 
   private buildForm(){
@@ -39,7 +37,7 @@ export class EditProjectObsComponent implements OnInit {
       estatus:['', [Validators.required]],
       solicitudes_tema:[''],
       observacion:['', [Validators.required, Validators.maxLength(200)]]
-    })
+    });
   }
 
   edit(event: Event){
@@ -54,13 +52,11 @@ export class EditProjectObsComponent implements OnInit {
         estatus_id:this.form.controls['estatus'].value
       }
       this.solicitudService.addObsRequest(this.historial).subscribe((data)=>{
-        this.refresh()
-      })
-    
+        this.refresh();
+      });
       this.solicitudService.editStatusRequest(this.solicitudId, this.status).subscribe((data)=>{
-        this.refresh()
-      })
-      
+        this.refresh();
+      });
     } else {
       validateAllFormFields(this.form);
     }
