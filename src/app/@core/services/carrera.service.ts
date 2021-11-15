@@ -66,6 +66,18 @@ export class CarreraService {
     return this.http.put(direccion, { ...tema }, { headers });
   }
 
+  editTemaSeleccionadoValue(
+    id: number,
+    seleccionado: boolean
+  ): Observable<any> {
+    let direccion = this.url + `/temas/${id}`;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getSession().jwt}`,
+    });
+    return this.http.put(direccion, { seleccionado }, { headers });
+  }
+
   deleteTemaById(id: number): Observable<any> {
     let direccion = this.url + `/temas/${id}`;
     const headers = new HttpHeaders({
@@ -104,8 +116,7 @@ export class CarreraService {
   }
 
   getMyHistorialRequest(userId: any): Observable<any> {
-    let direccion =
-      this.url + `/historials?solicitudes_tema.id=${userId}`;
+    let direccion = this.url + `/historials?solicitudes_tema.id=${userId}`;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${getSession().jwt}`,
@@ -113,7 +124,7 @@ export class CarreraService {
     return this.http.get(direccion, { headers });
   }
 
-  getAllTemaByCarrera(id: number){
+  getAllTemaByCarrera(id: number) {
     let direccion = this.url + `/temas?carrera_id.id=${id}`;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',

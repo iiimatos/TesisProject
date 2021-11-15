@@ -124,7 +124,14 @@ export class AddRequestComponent implements OnInit {
           estatus_id: { id: '1' },
         };
         this.solicitudService.createSolicitud(this.solicitud).subscribe((_) => {
-          window.location.reload();
+          this.carreraService
+            .editTemaSeleccionadoValue(
+              this.form.controls['tema_id'].value,
+              true
+            )
+            .subscribe((_) => {
+              window.location.reload();
+            });
         });
       });
     } else {
