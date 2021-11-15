@@ -107,7 +107,8 @@ export class CarreraService {
 
   getMyHistorial(userId: string): Observable<any> {
     let direccion =
-      this.url + `/historials?solicitudes_tema.usuario_id.id=${userId}`;
+      this.url +
+      `/historials?solicitudes_tema.usuario_id.id=${userId}&_sort=id:DESC`;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${getSession().jwt}`,

@@ -49,12 +49,12 @@ export interface IStatus {
 
 export interface ISolitud {
   id?: number;
-  asesor_id: IAsesor;
-  carrera_id: ICarrera;
-  linea_investigacion: ILineaInvestigacion;
-  tema_id: ITema;
-  datosProyecto: string;
-  usuario_id: Array<IUser>;
+  asesor_id?: IAsesor;
+  carrera_id?: ICarrera;
+  linea_investigacion?: ILineaInvestigacion;
+  tema_id?: ITema;
+  datosProyecto?: string;
+  usuario_id?: Array<IUser>;
   status?: boolean;
   estatus_id?: IStatus;
   created_at?: Date;

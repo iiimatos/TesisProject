@@ -35,7 +35,7 @@ export class UserService {
     let direccion = this.url + '/users-permissions/roles';
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.getSession().jwt}`,
+      Authorization: `Bearer ${getSession().jwt}`,
     });
     return this.http.get(direccion, { headers });
   }
@@ -43,7 +43,7 @@ export class UserService {
     let direccion = this.url + '/carreras';
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.getSession().jwt}`,
+      Authorization: `Bearer ${getSession().jwt}`,
     });
     return this.http.get(direccion, { headers });
   }
@@ -60,7 +60,7 @@ export class UserService {
   putUser(form: IUser, id: any): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.getSession().jwt}`,
+      Authorization: `Bearer ${getSession().jwt}`,
     });
     let direccion = this.url + '/users/' + id;
     return this.http.put(direccion, form, { headers });
@@ -69,7 +69,7 @@ export class UserService {
   deleteUser(id: any): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.getSession().jwt}`,
+      Authorization: `Bearer ${getSession().jwt}`,
     });
     let direccion = this.url + '/users/' + id;
     return this.http.delete(direccion, { headers });
@@ -77,17 +77,9 @@ export class UserService {
   postUser(form: IUser2): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.getSession().jwt}`,
+      Authorization: `Bearer ${getSession().jwt}`,
     });
     let direccion = this.url + '/auth/local/register';
     return this.http.post(direccion, form, { headers });
-  }
-
-  getSession(): ISession {
-    return getSession();
-  }
-
-  resetSession() {
-    resetSession();
   }
 }
