@@ -17,20 +17,26 @@
             </select>
           </div>
         </div>
-        <div *ngIf="temas?.length != 0">
-          <div class="content border border-info p-2" *ngFor="let tema of temas">
-            <div>
-              <p>{{tema.tema}} - <i class="fas fas2 fa-file"></i> <span class="form-text">{{tema.carrera_id.carrera}}
-                  -
-                  {{tema.carrera_id.created_at | date:"dd/MM/yy"}}</span></p>
-            </div>
-            <div class="">
-              <button class="btn btn-primary" (click)="viewModalTema(tema.id)">
-                <i class="far fa-eye"></i>
-              </button>
-            </div>
-          </div>
-        </div>
+        <table *ngIf="temas?.length != 0" class="table table-bordered mt-2">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Tema</th>
+              <th scope="col">Carrera</th>
+              <th scope="col">Opciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let tema of temas index as i">
+              <th scope="row">{{i + 1}}</th>
+              <td>{{tema.carrera_id.carrera}}</td>
+              <td>{{tema.tema}}</td>
+              <td><button class="btn btn-primary" (click)="viewModalTema(tema.id)">
+                  <i class="far fa-eye"></i>
+                </button></td>
+            </tr>
+          </tbody>
+        </table>
         <div class="alert alert-danger text-center" role="alert" *ngIf="temas?.length === 0">
           No hay temas disponible.
         </div>

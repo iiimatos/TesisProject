@@ -67,22 +67,24 @@
               <tr *ngFor="let project of projects; index as i">
                 <th scope="row">{{i+1}}</th>
                 <td>{{project.tema_id.tema}}</td>
-                <td><p *ngFor="let usuario of project.usuario_id">{{usuario.nombre}} {{usuario.apellido}}</p></td>
+                <td>
+                  <p *ngFor="let usuario of project.usuario_id">{{usuario.nombre}} {{usuario.apellido}}</p>
+                </td>
                 <td>{{project.asesor_id.nombre}}</td>
                 <td>{{project.estatus_id.nombre}}</td>
                 <td>{{project.carrera_id.codigoCarrera}}</td>
                 <td>
-                  <button (click)="viewModal(project.id)" class="btn btn-primary">
+                  <button (click)="viewModal(project.id)" class="btn btn-primary mr-1">
                     <i class="far fa-eye"></i>
                   </button>
-                  <button (click)="editarProyecto(project.id)" class="btn btn-success mx-3">
+                  <button (click)="editarProyecto(project.id)" class="btn btn-success">
                     <i class="fas fa-edit"></i>
                   </button>
                 </td>
               </tr>
             </tbody>
           </table>
-          
+
         </div>
       </ng-template>
     </li>

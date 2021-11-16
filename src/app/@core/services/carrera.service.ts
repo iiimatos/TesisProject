@@ -29,6 +29,14 @@ export class CarreraService {
     });
     return this.http.get(direccion, { headers });
   }
+  getAllTemas(): Observable<any> {
+    let direccion = this.url + `/temas`;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getSession().jwt}`,
+    });
+    return this.http.get(direccion, { headers });
+  }
 
   getAllTemasNoSeleccionado(): Observable<any> {
     let direccion = this.url + '/temas?seleccionado=false';

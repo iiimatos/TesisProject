@@ -27,7 +27,7 @@ export class LoginComponent {
 
   private buildForm() {
     this.form = this.formBuilder.group({
-      identifier: ['', [Validators.required, Validators.email]],
+      identifier: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }

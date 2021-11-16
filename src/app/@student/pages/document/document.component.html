@@ -6,15 +6,11 @@
         placeholder="Buscar documentos" aria-label="Recipient's username" aria-describedby="basic-addon2">
     </div>
   </div>
-  <div class="content border bg border-info p-2" *ngFor="let file of files; index as i">
+  <a class="content border bg border-info p-2 text-dark" href="http://localhost:1337{{file.url}}" target="_blank"
+    *ngFor="let file of files; index as i">
     <div>
       <p>{{file.name}} - <i class="fas fas2 fa-file"></i> <span class="form-text">
           Fecha de subida: {{file.created_at | date:"dd/MM/yy"}}</span></p>
     </div>
-    <div class="">
-      <a class="btn btn-success btn-block" href="http://localhost:1337{{file.url}}" target="_blank">
-        <i class="fas fa-eye"></i>
-      </a>
-    </div>
-  </div>
+  </a>
 </div>

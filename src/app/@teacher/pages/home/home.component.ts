@@ -34,9 +34,20 @@ export class HomeComponent implements OnInit {
     ref.componentInstance.solicitudId = id;
   }
 
-  acceptRequest(id: number) {
-    this.solicitudService.acceptRequest(id).subscribe((_) => {
-      this.refresh();
+  acceptRequest(id: number, i: number) {
+    this.solicitudService.acceptRequest(id).subscribe((data) => {
+      this.carreraService
+        .editTemaSeleccionadoValue(this.requests[i].tema_id.id, false)
+        .subscribe((_) => {
+          const history: IHistorial = {
+            observacion: 'Solicitud aceptada',
+            estatus: { id: '2' },
+            solicitudes_tema: { id },
+          };
+          this.solicitudService.addObsRequest(history).subscribe((_) => {
+            window.location.reload();
+          });
+        });
     });
   }
   cancelRequest(id: number, i: number) {
