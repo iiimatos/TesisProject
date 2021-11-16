@@ -209,7 +209,11 @@ export class SolicitudService {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${getSession().jwt}`,
     });
-    return this.http.put(direccion, { estatus_id: 2 }, { headers });
+    return this.http.put(
+      direccion,
+      { status: true, estatus_id: 2 },
+      { headers }
+    );
   }
   cancelRequest(id: number): Observable<any> {
     let direccion = this.url + `/solicitudes-temas/${id}`;
