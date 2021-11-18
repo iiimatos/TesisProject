@@ -112,18 +112,9 @@ export class TopicBankComponent implements OnInit {
   }
 
   viewModal(id: number) {
-    // console.log(id);
     const ref = this.modalService.open(ViewRequestComponent, {
       size: 'lg',
     });
     ref.componentInstance.solicitudId = id;
-    ref.result.then(
-      (yes) => {
-        console.log(yes);
-      },
-      (cancel) => {
-        console.log(cancel);
-      }
-    );
   }
 }

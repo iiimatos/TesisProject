@@ -31,13 +31,13 @@
         <td>Pediente de aprobacion</td>
         <td>{{item.carrera_id.codigoCarrera}}</td>
         <td>
-          <button class="btn btn-primary" (click)="viewModal(item.id)">
+          <button class="btn btn-primary" type="button" (click)="viewModal(item.id)">
             <i class="far fa-eye"></i>
           </button>
-          <button class="btn btn-success mx-3" (click)="acceptRequest(item.id, i)">
+          <button class="btn btn-success mx-3" type="button" (click)="acceptRequest(item.id, i)">
             <i class="fas fa-check"></i>
           </button>
-          <button class="btn btn-danger" (click)="cancelRequest(item.id, i)">
+          <button class="btn btn-danger" type="button" (click)="cancelRequest(item.id, i)">
             <i class="fas fa-times"></i>
           </button>
         </td>
