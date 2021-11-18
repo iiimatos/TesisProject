@@ -16,11 +16,13 @@ import { Router } from '@angular/router';
 })
 export class TopicBankComponent implements OnInit {
   active = 1;
-  public projects:Array<any>=[];
+  public projects: Array<any> = [];
+  estados = [];
+
   constructor(
     private solicitudService: SolicitudService,
     private modalService: NgbModal,
-    private router:Router,
+    private router: Router,
     private carreraService: CarreraService
   ) {}
 
@@ -28,6 +30,7 @@ export class TopicBankComponent implements OnInit {
     this.getAllProyectosCulminados();
     this.getAllTemas();
     this.getAllOnProject();
+    this.getStatus();
   }
 
   //tema pre-aprobados
@@ -38,10 +41,10 @@ export class TopicBankComponent implements OnInit {
     });
   }
 
-  getAllOnProject(){
-    this.solicitudService.getAllOnProject().subscribe(data=>{
+  getAllOnProject() {
+    this.solicitudService.getAllOnProject().subscribe((data) => {
       this.projects = data;
-    })
+    });
   }
 
   viewModalTema(id: number) {
@@ -80,6 +83,26 @@ export class TopicBankComponent implements OnInit {
     });
   }
 
+  //proyecto en curso
+
+  getStatus() {
+    this.solicitudService.getStatusNotAll().subscribe((data) => {
+      this.estados = data;
+    });
+  }
+
+  onChangeEstados(value: any) {
+    if (value.target.value !== 'todos') {
+      this.solicitudService
+        .getProyectoByEstatusId(Number(value.target.value))
+        .subscribe((data) => {
+          this.projects = data;
+        });
+    } else {
+      this.getAllOnProject();
+    }
+  }
+
   //proyectos culmiados
   solicitudesCuliminadas: Array<ISolitud> = [];
   namesCulimandos: Array<string> = [];
@@ -93,7 +116,6 @@ export class TopicBankComponent implements OnInit {
       );
     });
   }
-
 
   viewModal(id: number) {
     // console.log(id);
@@ -111,8 +133,7 @@ export class TopicBankComponent implements OnInit {
     );
   }
 
-  editarProyecto(id:number){
-    this.router.navigate(['teacher/topicbank/project-edit/', id])
+  editarProyecto(id: number) {
+    this.router.navigate(['teacher/topicbank/project-edit/', id]);
   }
-
 }
