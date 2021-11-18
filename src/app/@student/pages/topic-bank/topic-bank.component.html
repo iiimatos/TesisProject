@@ -9,7 +9,7 @@
         <div class="row my-3">
           <div class="col-8"></div>
           <div class="col-4">
-            <select class="form-select" id="carrera" (change)="onChange($event)" name="carrera">
+            <select class="form-select" id="carrera" (change)="onChangeTemas($event)" name="carrera">
               <option value="" selected disabled hidden>Seleccione su carrera</option>
               <option value="todos">Todos</option>
               <option *ngFor="let carrera of carreras" value="{{carrera.id}}">
@@ -45,6 +45,17 @@
     <li [ngbNavItem]="2">
       <a ngbNavLink>Proyectos en curso</a>
       <ng-template ngbNavContent>
+        <div class="row my-3">
+          <div class="col-8"></div>
+          <div class="col-4">
+            <select class="form-select" id="estados" (change)="onChangeEstados($event)" name="estados">
+              <option value="" selected disabled hidden>Busque por estado</option>
+              <option value="todos">Todos</option>
+              <option *ngFor="let estados of estados" value="{{estados.id}}">
+                {{estados.nombre}}</option>
+            </select>
+          </div>
+        </div>
         <table class="table table-bordered mt-2">
           <thead>
             <tr>
@@ -57,6 +68,9 @@
               <th scope="col">Opciones</th>
             </tr>
           </thead>
+          <tbody *ngIf="solicitudesNoCuliminadas.length == 0">
+            <td colspan="8" class="text-center">No hay registros...</td>
+          </tbody>
           <tbody>
             <tr *ngFor="let solicitud of solicitudesNoCuliminadas; index as i">
               <th scope="row">{{i + 1}}</th>

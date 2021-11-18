@@ -26,6 +26,7 @@ export class TopicBankComponent implements OnInit {
   temas: Array<ITema> = [];
   carreras: Array<ICarrera> = [];
   temaSearch = '';
+  estados = [];
 
   ngOnInit(): void {
     this.getAllTemas();
@@ -34,6 +35,7 @@ export class TopicBankComponent implements OnInit {
     });
     this.getAllProyectosEnCurso();
     this.getAllProyectosCulminados();
+    this.getEstados();
   }
 
   getAllTemas() {
@@ -42,7 +44,7 @@ export class TopicBankComponent implements OnInit {
     });
   }
 
-  onChange(value: any) {
+  onChangeTemas(value: any) {
     if (value.target.value !== 'todos') {
       this.carreraService
         .getTemaByIdCarreraNoSeleccionado(Number(value.target.value))
@@ -61,8 +63,6 @@ export class TopicBankComponent implements OnInit {
   getAllProyectosEnCurso() {
     this.solicitudService.getSolicitudNotCulminadas().subscribe((data) => {
       this.solicitudesNoCuliminadas = data;
-      console.log(this.solicitudesNoCuliminadas);
-
       this.names = this.solicitudesNoCuliminadas.map((soli) =>
         soli.usuario_id.map((usuario) => usuario.nombre).join(', ')
       );
@@ -76,7 +76,28 @@ export class TopicBankComponent implements OnInit {
     ref.componentInstance.temaId = id;
   }
 
-  //temas - preaprobados
+  //proyectos en cursos
+  getEstados() {
+    this.solicitudService.getAllStatus().subscribe((data) => {
+      this.estados = data;
+    });
+  }
+  onChangeEstados(value: any) {
+    if (value.target.value !== 'todos') {
+      this.solicitudService
+        .getProyectoByEstatusId(Number(value.target.value))
+        .subscribe((data) => {
+          this.solicitudesNoCuliminadas = data;
+          this.names = this.solicitudesNoCuliminadas.map((soli) =>
+            soli.usuario_id.map((usuario) => usuario.nombre).join(', ')
+          );
+        });
+    } else {
+      this.getAllProyectosEnCurso();
+    }
+  }
+
+  //proyecto culminados
   solicitudesCuliminadas: Array<ISolitud> = [];
   namesCulimandos: Array<string> = [];
 

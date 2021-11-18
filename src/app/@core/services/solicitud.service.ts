@@ -168,6 +168,15 @@ export class SolicitudService {
     return this.http.get(direccion, { headers });
   }
 
+  getProyectoByEstatusId(estatud_id: number): Observable<any> {
+    let direccion = this.url + `/solicitudes-temas?estatus_id.id=${estatud_id}`;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getSession().jwt}`,
+    });
+    return this.http.get(direccion, { headers });
+  }
+
   editTopicRequest(id: any, temaId: any): Observable<any> {
     let direccion = this.url + `/solicitudes-temas/${id}`;
     const headers = new HttpHeaders({
