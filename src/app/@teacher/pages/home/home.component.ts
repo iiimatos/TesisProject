@@ -37,7 +37,9 @@ export class HomeComponent implements OnInit {
   acceptRequest(id: number, i: number) {
     this.solicitudService.acceptRequest(id).subscribe((data) => {
       this.carreraService
-        .editTemaSeleccionadoValue(this.requests[i].tema_id.id, false)
+        .editTemaSeleccionadoValue(this.requests[i].tema_id.id, {
+          seleccionado: false,
+        })
         .subscribe((_) => {
           const history: IHistorial = {
             observacion: 'Solicitud aceptada',
@@ -53,7 +55,9 @@ export class HomeComponent implements OnInit {
   cancelRequest(id: number, i: number) {
     this.solicitudService.cancelRequest(id).subscribe((_) => {
       this.carreraService
-        .editTemaSeleccionadoValue(this.requests[i].tema_id.id, false)
+        .editTemaSeleccionadoValue(this.requests[i].tema_id.id, {
+          seleccionado: false,
+        })
         .subscribe((_) => {
           const history: IHistorial = {
             observacion: 'Solicitud rechazada',

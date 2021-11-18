@@ -74,16 +74,13 @@ export class CarreraService {
     return this.http.put(direccion, { ...tema }, { headers });
   }
 
-  editTemaSeleccionadoValue(
-    id: number,
-    seleccionado: boolean
-  ): Observable<any> {
+  editTemaSeleccionadoValue(id: number, seleccionado: object): Observable<any> {
     let direccion = this.url + `/temas/${id}`;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${getSession().jwt}`,
     });
-    return this.http.put(direccion, { seleccionado }, { headers });
+    return this.http.put(direccion, seleccionado, { headers });
   }
 
   deleteTemaById(id: number): Observable<any> {

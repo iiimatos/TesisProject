@@ -125,10 +125,9 @@ export class AddRequestComponent implements OnInit {
         };
         this.solicitudService.createSolicitud(this.solicitud).subscribe((_) => {
           this.carreraService
-            .editTemaSeleccionadoValue(
-              this.form.controls['tema_id'].value,
-              true
-            )
+            .editTemaSeleccionadoValue(this.form.controls['tema_id'].value, {
+              seleccionado: true,
+            })
             .subscribe((_) => {
               window.location.reload();
             });

@@ -18,6 +18,7 @@ export class TopicBankComponent implements OnInit {
   active = 1;
   public projects: Array<any> = [];
   estados = [];
+  names: Array<string> = [];
 
   constructor(
     private solicitudService: SolicitudService,
@@ -44,6 +45,9 @@ export class TopicBankComponent implements OnInit {
   getAllOnProject() {
     this.solicitudService.getAllOnProject().subscribe((data) => {
       this.projects = data;
+      this.names = this.projects.map((soli) =>
+        soli.usuario_id.map((usuario) => usuario.nombre).join(', ')
+      );
     });
   }
 
@@ -97,6 +101,9 @@ export class TopicBankComponent implements OnInit {
         .getProyectoByEstatusId(Number(value.target.value))
         .subscribe((data) => {
           this.projects = data;
+          this.names = this.projects.map((soli) =>
+            soli.usuario_id.map((usuario) => usuario.nombre).join(', ')
+          );
         });
     } else {
       this.getAllOnProject();
@@ -123,14 +130,6 @@ export class TopicBankComponent implements OnInit {
       size: 'lg',
     });
     ref.componentInstance.solicitudId = id;
-    ref.result.then(
-      (yes) => {
-        console.log(yes);
-      },
-      (cancel) => {
-        console.log(cancel);
-      }
-    );
   }
 
   editarProyecto(id: number) {

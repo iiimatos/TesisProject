@@ -79,7 +79,7 @@
                 <th scope="row">{{i+1}}</th>
                 <td>{{project.tema_id.tema}}</td>
                 <td>
-                  <p *ngFor="let usuario of project.usuario_id">{{usuario.nombre}} {{usuario.apellido}}</p>
+                  {{names[i]}}
                 </td>
                 <td>{{project.asesor_id.nombre}}</td>
                 <td>{{project.estatus_id.nombre}}</td>
