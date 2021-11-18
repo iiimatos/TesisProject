@@ -159,6 +159,15 @@ export class SolicitudService {
     return this.http.get(direccion, { headers });
   }
 
+  getStatusNotAll(): Observable<any> {
+    let direccion = this.url + '/estatuses?seleccionado=true';
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getSession().jwt}`,
+    });
+    return this.http.get(direccion, { headers });
+  }
+
   editTopicRequest(id: any, temaId: any): Observable<any> {
     let direccion = this.url + `/solicitudes-temas/${id}`;
     const headers = new HttpHeaders({
