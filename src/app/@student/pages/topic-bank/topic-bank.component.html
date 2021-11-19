@@ -104,6 +104,9 @@
               <th scope="col">Opciones</th>
             </tr>
           </thead>
+          <tbody *ngIf="solicitudesCuliminadas.length == 0">
+            <td colspan="8" class="text-center">No hay registros...</td>
+          </tbody>
           <tbody>
             <tr *ngFor="let solicitud of solicitudesCuliminadas; index as i">
               <th scope="row">{{i + 1}}</th>

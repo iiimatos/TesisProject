@@ -1,3 +1,4 @@
+import { AuthService } from './../../../@core/services/auth.service';
 import { IHistorial } from './../../../@core/models/carrera.interface';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -15,20 +16,28 @@ import Swal from 'sweetalert2';
 export class HomeComponent implements OnInit {
   public solicitudes: ISolitud;
   public requests: Array<any> = [];
+  names: Array<string> = [];
+
   constructor(
     private solicitudService: SolicitudService,
     private modalService: NgbModal,
-    private carreraService: CarreraService
+    private carreraService: CarreraService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
-    this.solicitudService.getAllRequestHome().subscribe((data) => {
-      this.requests = data;
+    this.authService.getMe().subscribe((data) => {
+      this.solicitudService.getAllRequestHome().subscribe((data) => {
+        this.requests = data;
+        this.names = this.requests.map((soli) =>
+          soli.usuario_id.map((usuario) => usuario.nombre).join(', ')
+        );
+        console.log(data);
+      });
     });
   }
 
   viewModal(id: number) {
-    // console.log(id);
     const ref = this.modalService.open(ViewRequestHomeComponent, {
       size: 'lg',
     });
@@ -47,20 +56,14 @@ export class HomeComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.solicitudService.acceptRequest(id).subscribe((data) => {
-          this.carreraService
-            .editTemaSeleccionadoValue(this.requests[i].tema_id.id, {
-              seleccionado: false,
-            })
-            .subscribe((_) => {
-              const history: IHistorial = {
-                observacion: 'Solicitud aceptada',
-                estatus: { id: '2' },
-                solicitudes_tema: { id },
-              };
-              this.solicitudService.addObsRequest(history).subscribe((_) => {
-                window.location.reload();
-              });
-            });
+          const history: IHistorial = {
+            observacion: 'Solicitud aceptada',
+            estatus: { id: '2' },
+            solicitudes_tema: { id },
+          };
+          this.solicitudService.addObsRequest(history).subscribe((_) => {
+            window.location.reload();
+          });
         });
         Swal.fire(
           '¡Aceptado!',

@@ -7,10 +7,9 @@
     <thead>
       <tr>
         <th scope="col">#</th>
-        <th scope="col">Tema</th>
+        <th scope="col" style="width: 20%">Tema</th>
         <th scope="col">Estudiantes</th>
         <th scope="col">Fecha</th>
-        <th scope="col">Actividad</th>
         <th scope="col">Estado</th>
         <th scope="col">Carrera</th>
         <th scope="col">Opciones</th>
@@ -20,21 +19,20 @@
       <td colspan="8" class="text-center">No hay registros...</td>
     </tbody>
     <tbody>
-      <tr *ngFor="let item of requests; index as i">
-        <th scope="row">{{i+1}}</th>
+      <tr *ngFor="let item of requests; index as i" scope="row">
+        <td> {{i+1}}</td>
         <td>{{item.tema_id.tema}}</td>
         <td>
-          <p *ngFor="let usuario of item.usuario_id">{{usuario.nombre}} {{usuario.apellido}}</p>
+          {{names[i]}}
         </td>
         <td ng-non-bindable>{{item.created_at | date:'MM/dd/yyyy'}}</td>
-        <td>Solicitud de tema</td>
-        <td>Pediente de aprobacion</td>
-        <td>{{item.carrera_id.codigoCarrera}}</td>
+        <td>{{item.estatus_id.nombre}}</td>
+        <td>{{item.carrera_id.carrera}}</td>
         <td>
           <button class="btn btn-primary" type="button" (click)="viewModal(item.id)">
             <i class="far fa-eye"></i>
           </button>
-          <button class="btn btn-success mx-3" type="button" (click)="acceptRequest(item.id, i)">
+          <button class="btn btn-success mx-1" type="button" (click)="acceptRequest(item.id, i)">
             <i class="fas fa-check"></i>
           </button>
           <button class="btn btn-danger" type="button" (click)="cancelRequest(item.id, i)">

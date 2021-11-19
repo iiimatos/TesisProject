@@ -131,8 +131,7 @@ export class SolicitudService {
   }
 
   getAllRequestHome(): Observable<any> {
-    let direccion =
-      this.url + '/solicitudes-temas?estatus_id=1&estatus_id.id_ne=7';
+    let direccion = this.url + '/solicitudes-temas?estatus_id=1';
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${getSession().jwt}`,
@@ -161,6 +160,15 @@ export class SolicitudService {
 
   getStatusNotAll(): Observable<any> {
     let direccion = this.url + '/estatuses?seleccionado=true';
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getSession().jwt}`,
+    });
+    return this.http.get(direccion, { headers });
+  }
+
+  getStatusNotAllNotAdd(): Observable<any> {
+    let direccion = this.url + '/estatuses?seleccionado=true&id_ne=6';
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${getSession().jwt}`,

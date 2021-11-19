@@ -61,7 +61,7 @@ export class TopicBankComponent implements OnInit {
   names: Array<string> = [];
 
   getAllProyectosEnCurso() {
-    this.solicitudService.getSolicitudNotCulminadas().subscribe((data) => {
+    this.solicitudService.getAllOnProject().subscribe((data) => {
       this.solicitudesNoCuliminadas = data;
       this.names = this.solicitudesNoCuliminadas.map((soli) =>
         soli.usuario_id.map((usuario) => usuario.nombre).join(', ')
@@ -78,7 +78,7 @@ export class TopicBankComponent implements OnInit {
 
   //proyectos en cursos
   getEstados() {
-    this.solicitudService.getAllStatus().subscribe((data) => {
+    this.solicitudService.getStatusNotAllNotAdd().subscribe((data) => {
       this.estados = data;
     });
   }

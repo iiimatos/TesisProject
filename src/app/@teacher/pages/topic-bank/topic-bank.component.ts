@@ -90,7 +90,7 @@ export class TopicBankComponent implements OnInit {
   //proyecto en curso
 
   getStatus() {
-    this.solicitudService.getStatusNotAll().subscribe((data) => {
+    this.solicitudService.getStatusNotAllNotAdd().subscribe((data) => {
       this.estados = data;
     });
   }
