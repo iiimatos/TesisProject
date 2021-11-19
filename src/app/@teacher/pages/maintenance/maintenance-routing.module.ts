@@ -6,12 +6,7 @@ const routes: Routes = [
   {
     path: '',
     component: MaintenanceComponent,
-  },
-  { 
-    path: 'user-edit/:id', 
-    loadChildren: () => import('../../core/components/user-edit/user-edit.module').then(m => m.UserEditModule)
-  },
-  { path: 'user-add', loadChildren: () => import('../../core/components/user-add/user-add.module').then(m => m.UserAddModule) },
+  }
   
 ];
 

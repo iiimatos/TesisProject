@@ -1,0 +1,24 @@
+<div class="modal-header">
+    <button class="btn btn-danger" aria-label="close" type="button" (click)="modal.dismiss()"><i
+        class="fas fa-times"></i></button>
+</div>
+<div class="modal-body">
+    <h6 class="lead">Informacion del estudiante</h6>
+    <hr />
+    <div class="row">
+        <div class="col-6">
+            <div class="m-1">
+                <p class="name">Nombre: <span class="text-secondary">{{user.nombre}}</span></p>
+                <p class="name">Matricula: <span class="text-secondary">{{user.username}}</span></p>
+            </div>
+        </div>
+        <div class="col-6">
+            <p class="name">Correo: <span class="text-secondary">{{user.email}}</span></p>
+            <p class="name">Carrera: <span class="text-secondary">{{user.carrera_id.carrera}}</span></p>
+        </div>
+        <div class="col-6">
+        
+            <p class="name">Rol: <span class="text-secondary">Estudiante</span></p>
+        </div>
+    </div>
+</div>

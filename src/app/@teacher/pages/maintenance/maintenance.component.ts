@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationExtras, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CarreraService } from 'src/app/@core/services/carrera.service';
+import { SolicitudService } from 'src/app/@core/services/solicitud.service';
 import { UserService } from 'src/app/@core/services/user.service';
 import Swal from 'sweetalert2';
+import { UserAddComponent } from '../../core/components/user-add/user-add.component';
+import { UserViewComponent } from '../../core/components/user-view/user-view.component';
 
 @Component({
   selector: 'app-maintenance',
@@ -11,7 +16,13 @@ import Swal from 'sweetalert2';
 export class MaintenanceComponent implements OnInit {
   public users: Array<any> = [];
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private solicitudService: SolicitudService,
+    private modalService: NgbModal,
+    private carreraService: CarreraService
+    ) {}
 
   ngOnInit(): void {
     this.getAllUsers();
@@ -46,11 +57,18 @@ export class MaintenanceComponent implements OnInit {
     });
   }
 
+  viewModalUser(id: number) {
+    const ref = this.modalService.open(UserViewComponent, {
+      size: 'lg',
+    });
+    ref.componentInstance.userId = id;
+  }
+
   editarUsuario(id: any) {
-    this.router.navigate(['teacher/maintenance/user-edit/', id]);
+   
   }
 
   nuevoUsuario() {
-    this.router.navigate(['teacher/maintenance/user-add/']);
+   
   }
 }
