@@ -151,6 +151,17 @@ export class SolicitudService {
     return this.http.get(direccion, { headers });
   }
 
+  getAllOnProjectData(carrera: number): Observable<any> {
+    let direccion =
+      this.url +
+      `/solicitudes-temas?status=true&estatus_id.id_ne=6&tema_id.carrera_id=${carrera}`;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getSession().jwt}`,
+    });
+    return this.http.get(direccion, { headers });
+  }
+
   getAllStatus(): Observable<any> {
     let direccion = this.url + '/estatuses';
     const headers = new HttpHeaders({
@@ -180,6 +191,20 @@ export class SolicitudService {
 
   getProyectoByEstatusId(estatud_id: number): Observable<any> {
     let direccion = this.url + `/solicitudes-temas?estatus_id.id=${estatud_id}`;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getSession().jwt}`,
+    });
+    return this.http.get(direccion, { headers });
+  }
+
+  getProyectoByEstatusIdData(
+    estatud_id: number,
+    carrera: number
+  ): Observable<any> {
+    let direccion =
+      this.url +
+      `/solicitudes-temas?estatus_id.id=${estatud_id}&tema_id.carrera_id=${carrera}`;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${getSession().jwt}`,

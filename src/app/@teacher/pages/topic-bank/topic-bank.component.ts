@@ -1,3 +1,4 @@
+import { AuthService } from './../../../@core/services/auth.service';
 import { TemaViewComponent } from './../../core/components/tema-view/tema-view.component';
 import { CarreraService } from './../../../@core/services/carrera.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -19,12 +20,14 @@ export class TopicBankComponent implements OnInit {
   public projects: Array<any> = [];
   estados = [];
   names: Array<string> = [];
+  carrera_id: number;
 
   constructor(
     private solicitudService: SolicitudService,
     private modalService: NgbModal,
     private router: Router,
-    private carreraService: CarreraService
+    private carreraService: CarreraService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -43,11 +46,16 @@ export class TopicBankComponent implements OnInit {
   }
 
   getAllOnProject() {
-    this.solicitudService.getAllOnProject().subscribe((data) => {
-      this.projects = data;
-      this.names = this.projects.map((soli) =>
-        soli.usuario_id.map((usuario) => usuario.nombre).join(', ')
-      );
+    this.authService.getMe().subscribe((data) => {
+      this.carrera_id = Number(data.carrera_id);
+      this.solicitudService
+        .getAllOnProjectData(Number(data.carrera_id))
+        .subscribe((data) => {
+          this.projects = data;
+          this.names = this.projects.map((soli) =>
+            soli.usuario_id.map((usuario) => usuario.nombre).join(', ')
+          );
+        });
     });
   }
 
@@ -98,7 +106,7 @@ export class TopicBankComponent implements OnInit {
   onChangeEstados(value: any) {
     if (value.target.value !== 'todos') {
       this.solicitudService
-        .getProyectoByEstatusId(Number(value.target.value))
+        .getProyectoByEstatusIdData(Number(value.target.value), this.carrera_id)
         .subscribe((data) => {
           this.projects = data;
           this.names = this.projects.map((soli) =>
