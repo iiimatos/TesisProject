@@ -27,13 +27,14 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.getMe().subscribe((data) => {
-      this.solicitudService.getAllRequestHome().subscribe((data) => {
-        this.requests = data;
-        this.names = this.requests.map((soli) =>
-          soli.usuario_id.map((usuario) => usuario.nombre).join(', ')
-        );
-        console.log(data);
-      });
+      this.solicitudService
+        .getAllRequestHome(data.carrera_id)
+        .subscribe((data) => {
+          this.requests = data;
+          this.names = this.requests.map((soli) =>
+            soli.usuario_id.map((usuario) => usuario.nombre).join(', ')
+          );
+        });
     });
   }
 
