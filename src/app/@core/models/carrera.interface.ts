@@ -18,6 +18,7 @@ export interface ITema {
   profesor?: IUser;
   created_at?: Date;
   updated_at?: Date;
+  estudiante?: boolean;
 }
 
 export interface IAsesor {

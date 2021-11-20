@@ -32,6 +32,8 @@ export class TopicRequestComponent implements OnInit {
   getSolicitudes() {
     this.authService.getMe().subscribe((data) => {
       this.solicitudService.getAllByUsers(data.id).subscribe((data) => {
+        console.log(data);
+
         this.solicitudes = data;
         this.names = this.solicitudes.map((soli) =>
           soli.usuario_id.map((usuario) => usuario.nombre).join(', ')

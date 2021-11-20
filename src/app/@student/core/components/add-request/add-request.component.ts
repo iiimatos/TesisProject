@@ -106,35 +106,48 @@ export class AddRequestComponent implements OnInit {
   save(event: Event) {
     event.preventDefault();
     if (this.form.valid) {
-      this.asesor = {
-        correo: this.form.controls['correo'].value,
-        institucionLabora: this.form.controls['institucionLabora'].value,
-        telefono: this.form.controls['telefono'].value,
-        nombre: this.form.controls['nombre'].value,
-        nivelAcademico: this.form.controls['nivelAcademico'].value,
-      };
-      this.solicitudService.createAsesor(this.asesor).subscribe((data) => {
-        this.solicitud = {
-          asesor_id: data.id,
-          carrera_id: this.form.controls['carrera_id'].value,
-          datosProyecto: this.form.controls['datosProyecto'].value,
-          linea_investigacion: this.form.controls['linea_investigacion'].value,
-          tema_id: this.form.controls['tema_id'].value,
-          usuario_id: this.form.controls['usuario_id'].value,
-          estatus_id: { id: '1' },
-        };
-        this.solicitudService.createSolicitud(this.solicitud).subscribe((_) => {
-          this.carreraService
-            .editTemaSeleccionadoValue(this.form.controls['tema_id'].value, {
-              seleccionado: true,
-            })
-            .subscribe((_) => {
-              window.location.reload();
-            });
+
+      if (!this.select) {
+        this.carreraService.createTema({ tema: this.form.controls['tema_id'].value, estudiante: true, carrera_id: this.form.controls['carrera_id'].value }).subscribe((data) => {
+          this.form.controls.tema_id.setValue(data.id);
+          this.crearSoli();
         });
-      });
+      } else {
+
+        this.crearSoli();
+      }
     } else {
       validateAllFormFields(this.form);
     }
   }
+  crearSoli() {
+    this.asesor = {
+      correo: this.form.controls['correo'].value,
+      institucionLabora: this.form.controls['institucionLabora'].value,
+      telefono: this.form.controls['telefono'].value,
+      nombre: this.form.controls['nombre'].value,
+      nivelAcademico: this.form.controls['nivelAcademico'].value,
+    };
+    this.solicitudService.createAsesor(this.asesor).subscribe((data) => {
+      this.solicitud = {
+        asesor_id: data.id,
+        carrera_id: this.form.controls['carrera_id'].value,
+        datosProyecto: this.form.controls['datosProyecto'].value,
+        linea_investigacion: this.form.controls['linea_investigacion'].value,
+        tema_id: this.form.controls['tema_id'].value,
+        usuario_id: this.form.controls['usuario_id'].value,
+        estatus_id: { id: '1' },
+      };
+      this.solicitudService.createSolicitud(this.solicitud).subscribe((_) => {
+        this.carreraService
+          .editTemaSeleccionadoValue(this.form.controls['tema_id'].value, {
+            seleccionado: true,
+          })
+          .subscribe((_) => {
+            window.location.reload();
+          });
+      });
+    });
+  }
+
 }

@@ -9,7 +9,7 @@ import { ITema } from '../models/carrera.interface';
   providedIn: 'root',
 })
 export class CarreraService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
   url = environment.urlApi;
 
   getAllCarreras(): Observable<any> {
@@ -22,7 +22,7 @@ export class CarreraService {
   }
 
   getTemaByIdCarreraNoSeleccionado(id: number): Observable<any> {
-    let direccion = this.url + `/temas?carrera_id.id=${id}&seleccionado=false`;
+    let direccion = this.url + `/temas?carrera_id.id=${id}&seleccionado=false&estudiante=false`;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${getSession().jwt}`,
@@ -39,7 +39,7 @@ export class CarreraService {
   }
 
   getAllTemasNoSeleccionado(): Observable<any> {
-    let direccion = this.url + '/temas?seleccionado=false';
+    let direccion = this.url + '/temas?seleccionado=false&estudiante=false';
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${getSession().jwt}`,
