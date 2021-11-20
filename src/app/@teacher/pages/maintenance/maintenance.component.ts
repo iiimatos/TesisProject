@@ -6,6 +6,7 @@ import { SolicitudService } from 'src/app/@core/services/solicitud.service';
 import { UserService } from 'src/app/@core/services/user.service';
 import Swal from 'sweetalert2';
 import { UserAddComponent } from '../../core/components/user-add/user-add.component';
+import { UserEditComponent } from '../../core/components/user-edit/user-edit.component';
 import { UserViewComponent } from '../../core/components/user-view/user-view.component';
 
 @Component({
@@ -64,11 +65,11 @@ export class MaintenanceComponent implements OnInit {
     ref.componentInstance.userId = id;
   }
 
-  editarUsuario(id: any) {
-   
+  editModalUser(id: number) {
+    const ref = this.modalService.open(UserEditComponent, {
+      size: 'lg',
+    });
+    ref.componentInstance.userId = id;
   }
 
-  nuevoUsuario() {
-   
-  }
 }

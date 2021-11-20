@@ -57,12 +57,12 @@ export class UserService {
     return this.http.get(direccion, { headers });
   }
 
-  putUser(form: IUser, id: any): Observable<any> {
+  putUser(form: any, userId: any): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${getSession().jwt}`,
     });
-    let direccion = this.url + '/users/' + id;
+    let direccion = this.url + '/users/' + userId;
     return this.http.put(direccion, form, { headers });
   }
 

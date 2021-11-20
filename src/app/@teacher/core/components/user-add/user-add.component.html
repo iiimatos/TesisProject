@@ -39,8 +39,20 @@
           </div>
           <div class="col-6">
             <label for="password" class="form-label">Contraseña</label>
-            <input type="text" class="form-control" formControlName="password" name="password" id="password"
-              placeholder="Contraseña" />
+            <div class="input-group">
+              <input [type]="fieldTextType ? 'text' : 'password'" class="form-control" formControlName="password" name="password" id="password"
+                placeholder="Contraseña" />
+                <div class="input-group-append">
+                  <span class="input-group-text">
+                    <i class="fa"
+                    [ngClass]="{
+                      'fa-eye-slash': !fieldTextType,
+                      'fa-eye': fieldTextType
+                    }"
+                    (click)="toggleFieldTextType()"></i>
+                  </span>
+               </div>
+            </div>
             <div class="mt-2" *ngIf="form.get('password').errors && form.get('password').touched">
               <p class="alert alert-danger" role="alert" *ngIf="form.get('password').hasError('required')">
                 Este campo es requerido

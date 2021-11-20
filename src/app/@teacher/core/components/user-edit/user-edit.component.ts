@@ -2,8 +2,10 @@ import { CarreraService } from './../../../../@core/services/carrera.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/@core/services/user.service';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { IUser } from 'src/app/@core/models/user.interface';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { validateAllFormFields } from 'src/app/@core/utils/form';
 
 @Component({
   selector: 'app-user-edit',
@@ -11,56 +13,54 @@ import { IUser } from 'src/app/@core/models/user.interface';
   styleUrls: ['./user-edit.component.scss'],
 })
 export class UserEditComponent implements OnInit {
-  public datosUsuarios: IUser;
+  userId : number = 0
+  public datosUsuarios: any;
   public carreras: any;
-  public roles: any;
-  editarForm = new FormGroup({
-    id: new FormControl(''),
-    nombre: new FormControl(''),
-    apellido: new FormControl(''),
-    username: new FormControl(''),
-    email: new FormControl(''),
-    role: new FormControl(''),
-    carrera: new FormControl(''),
-  });
+  public form: FormGroup;
   constructor(
-    private router: Router,
-    private activateRoute: ActivatedRoute,
+    public modal: NgbActiveModal,
     private userService: UserService,
+    private formBuilder: FormBuilder
 
-  ) {}
+  ) {
+    this.buildForm();
+  }
 
   ngOnInit(): void {
-    let userid = this.activateRoute.snapshot.paramMap.get('id');
-    this.userService.getAllRoles().subscribe((data) => {
-      this.roles = data.roles;
-    });
     this.userService.getAllCareers().subscribe((data) => {
       this.carreras = data;
     });
-    this.userService.getUserById(userid).subscribe((data) => {
+    this.userService.getUserById(this.userId).subscribe((data) => {
       this.datosUsuarios = data;
-      this.editarForm.setValue({
-        id: userid,
+      this.form.patchValue({
         nombre: this.datosUsuarios.nombre,
         apellido: this.datosUsuarios.apellido,
         username: this.datosUsuarios.username,
         email: this.datosUsuarios.email,
-        role: this.datosUsuarios.role.id,
-        carrera: this.datosUsuarios.carrera_id.id,
+        carrera_id: this.datosUsuarios.carrera_id.id,
       });
     });
   }
-
-  postForm(form: IUser) {
-    const datosUsuarios = form;
-    const userid = this.datosUsuarios?.id;
-    this.userService.putUser(form, userid).subscribe((data) => {
-      this.router.navigate(['teacher/maintenance']);
+  
+  private buildForm() {
+    this.form = this.formBuilder.group({
+      nombre: ['', [Validators.required]],
+      apellido: ['', [Validators.required]],
+      username: ['', [Validators.required]],
+      email: ['', [Validators.required]],
+      carrera_id: ['', [Validators.required]],
     });
   }
 
-  goToBackList() {
-    this.router.navigate(['teacher/maintenance']);
+  save(event: Event){
+    event.preventDefault();
+    if (this.form.valid) {
+      this.datosUsuarios = this.form.value;
+      this.userService.putUser(this.datosUsuarios, this.userId).subscribe((data)=>{
+        window.location.reload();
+      })
+    } else {
+      validateAllFormFields(this.form);
+    }
   }
 }

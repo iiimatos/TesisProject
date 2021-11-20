@@ -16,6 +16,7 @@ export class UserAddComponent implements OnInit {
   private form: FormGroup;
   private user: any;
   private carreras: any;
+  fieldTextType:boolean;
   constructor(
     public modal:NgbModal,
     private router: Router,
@@ -38,9 +39,12 @@ export class UserAddComponent implements OnInit {
       username: ['', [Validators.required]],
       password: ['', [Validators.required]],
       email: ['', [Validators.required]],
-      role: (0),
       carrera_id: ['', [Validators.required]],
     });
+  }
+  
+  toggleFieldTextType() {
+    this.fieldTextType = !this.fieldTextType;
   }
 
   save(event: Event){
