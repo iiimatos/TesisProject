@@ -1,9 +1,11 @@
 import { CarreraService } from './../../../../@core/services/carrera.service';
 import { UserService } from 'src/app/@core/services/user.service';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IUser, IUser2 } from 'src/app/@core/models/user.interface';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { validateAllFormFields } from 'src/app/@core/utils/form';
 
 @Component({
   selector: 'app-user-add',
@@ -11,39 +13,46 @@ import { IUser, IUser2 } from 'src/app/@core/models/user.interface';
   styleUrls: ['./user-add.component.scss'],
 })
 export class UserAddComponent implements OnInit {
-  nuevoForm = new FormGroup({
-    id: new FormControl(''),
-    nombre: new FormControl(''),
-    apellido: new FormControl(''),
-    username: new FormControl(''),
-    password: new FormControl(''),
-    email: new FormControl(''),
-    role: new FormControl(0),
-    carrera_id: new FormControl(''),
-  });
-  public carreras: any;
-  public roles: any;
-  constructor(private router: Router, private userService: UserService) {}
+  private form: FormGroup;
+  private user: any;
+  private carreras: any;
+  constructor(
+    public modal:NgbModal,
+    private router: Router,
+    private userService: UserService,
+    private formBuilder: FormBuilder
+    ) {
+      this.buildForm();
+    }
 
   ngOnInit(): void {
-    this.userService.getAllRoles().subscribe((data) => {
-      this.roles = data.roles;
-    });
     this.userService.getAllCareers().subscribe((data) => {
       this.carreras = data;
     });
   }
 
-  postForm(form: IUser2) {
-    form.role = Number(form.role);
-    console.log(form);
-    //  this.userService.postUser(form).subscribe(data=>{
-    //   console.log(data);
-    //   this.router.navigate(['teacher/maintenance']);
-    // })
+  private buildForm() {
+    this.form = this.formBuilder.group({
+      nombre: ['', [Validators.required]],
+      apellido: ['', [Validators.required]],
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required]],
+      email: ['', [Validators.required]],
+      role: (0),
+      carrera_id: ['', [Validators.required]],
+    });
   }
 
-  goToBackList() {
-    this.router.navigate(['teacher/maintenance']);
+  save(event: Event){
+    event.preventDefault();
+    if (this.form.valid) {
+        this.user = this.form.value;
+        this.userService.postUser(this.user).subscribe((data) => {
+          console.log(data);
+          window.location.reload();
+        });
+    } else {
+      validateAllFormFields(this.form);
+    }
   }
 }

@@ -74,6 +74,7 @@ export class UserService {
     let direccion = this.url + '/users/' + id;
     return this.http.delete(direccion, { headers });
   }
+  
   postUser(form: IUser2): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
