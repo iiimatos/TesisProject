@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/@core/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { SolicitudService } from 'src/app/@core/services/solicitud.service';
 import Swal from 'sweetalert2';
+import { CarreraService } from 'src/app/@core/services/carrera.service';
 
 @Component({
   selector: 'app-topic-request',
@@ -16,8 +17,10 @@ export class TopicRequestComponent implements OnInit {
   constructor(
     private solicitudService: SolicitudService,
     private authService: AuthService,
-    private modalService: NgbModal
-  ) {}
+    private modalService: NgbModal,
+    private carreraService: CarreraService,
+
+  ) { }
 
   solicitudes: Array<ISolitud> = [];
   names: Array<string> = [];
@@ -68,7 +71,7 @@ export class TopicRequestComponent implements OnInit {
     );
   }
 
-  delete(idSoli: number, idAsesor: number) {
+  delete(idSoli: number, idAsesor: number, i: number) {
     Swal.fire({
       title: 'Deseas eliminar esta solicitud?',
       text: 'No hay vuelta atras!!!',
@@ -84,6 +87,12 @@ export class TopicRequestComponent implements OnInit {
             this.getSolicitudes();
           });
         });
+
+        this.carreraService
+          .editTemaSeleccionadoValue(this.solicitudes[i].tema_id?.id, {
+            seleccionado: false,
+          })
+          .subscribe((_) => { });
         Swal.fire(
           'Eliminado!',
           'Solicitud fue eliminar correctamente!.',

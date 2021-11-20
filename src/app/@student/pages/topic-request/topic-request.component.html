@@ -35,7 +35,7 @@
             <i class="fas fa-edit"></i>
           </button>
           <button *ngIf="solicitud.estatus_id.nombre === 'Pendiente de Aprobacion'"
-            (click)="delete(solicitud.id, solicitud.asesor_id.id)" class="btn btn-danger">
+            (click)="delete(solicitud.id, solicitud.asesor_id.id, i)" class="btn btn-danger">
             <i class="fas fa-trash-alt"></i>
           </button>
         </td>

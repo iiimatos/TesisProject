@@ -63,8 +63,6 @@ export class EditRequestComponent implements OnInit {
         this.solicitudes = data;
         let usersId = data.usuario_id.map((usuario) => usuario.id);
         this.form.patchValue({
-          carrera_id: data.carrera_id.id,
-          tema_id: data.tema_id.id,
           nombre: data.asesor_id.nombre,
           telefono: data.asesor_id.telefono,
           nivelAcademico: data.asesor_id.nivelAcademico,
@@ -80,8 +78,6 @@ export class EditRequestComponent implements OnInit {
 
   private buildForm() {
     this.form = this.formBuilder.group({
-      carrera_id: ['', [Validators.required]],
-      tema_id: ['', [Validators.required]],
       usuario_id: [[]],
       nombre: ['', [Validators.required]],
       telefono: ['', [Validators.required]],
@@ -121,11 +117,6 @@ export class EditRequestComponent implements OnInit {
     });
   }
 
-  changeOption(value: boolean) {
-    this.select = value;
-    this.form.controls.tema_id.setValue('');
-  }
-
   edit(event: Event) {
     event.preventDefault();
     if (this.form.valid) {
@@ -141,11 +132,9 @@ export class EditRequestComponent implements OnInit {
         .subscribe((data) => {
           this.solicitud = {
             asesor_id: data.id,
-            carrera_id: this.form.controls['carrera_id'].value,
             datosProyecto: this.form.controls['datosProyecto'].value,
             linea_investigacion:
               this.form.controls['linea_investigacion'].value,
-            tema_id: this.form.controls['tema_id'].value,
             usuario_id: this.form.controls['usuario_id'].value,
           };
           this.solicitudService
