@@ -121,8 +121,9 @@
       <hr />
       <div class="mb-1">
         <label for="datosProyecto" class="form-label">Escriba sobre el proyecto</label>
-        <textarea class="form-control" formControlName="datosProyecto" id="datosProyecto" name="datosProyecto"
-          rows="3"></textarea>
+        <textarea class="form-control"
+          placeholder="Explique brevemente el problema que será tratado y el alcance o justificacion del proyecto"
+          formControlName="datosProyecto" id="datosProyecto" name="datosProyecto" rows="3"></textarea>
         <div class="mt-2" *ngIf="form.get('datosProyecto').errors && form.get('datosProyecto').touched">
           <p class="alert alert-danger" role="alert" *ngIf="form.get('datosProyecto').hasError('required')">
             Este campo es requerido
